@@ -4,6 +4,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    includeBuild("build-logic")
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -14,5 +15,9 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Linguist Copilot"
+
 include(":app")
- 
+include(":core:feature-toggles")
+include(":features:splash")
+include(":design")
+include(":plugins")
