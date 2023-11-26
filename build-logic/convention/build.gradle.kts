@@ -30,8 +30,12 @@ gradlePlugin {
             implementationClass = "plugins.AndroidLibConventionPlugin"
         }
         register("androidPresentationFeature") {
-            id = "conventionPluginsApp.android.presentationFeature"
+            id = "conventionPluginsApp.android.library.presentationFeature"
             implementationClass = "plugins.AndroidPresentationFeatureConventionPlugin"
+        }
+        register("androidCompose") {
+            id = "conventionPluginsApp.android.library.compose"
+            implementationClass = "plugins.AndroidComposeConventionPlugin"
         }
     }
 }

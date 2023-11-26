@@ -1,7 +1,8 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("conventionPluginsApp.android.library")
-    id("conventionPluginsApp.android.presentationFeature")
+    id("conventionPluginsApp.android.library.presentationFeature")
+    id("conventionPluginsApp.android.library.compose")
 }
 
 android {
