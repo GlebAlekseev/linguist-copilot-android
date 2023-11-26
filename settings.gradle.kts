@@ -17,7 +17,9 @@ dependencyResolutionManagement {
 rootProject.name = "Linguist Copilot"
 
 include(":app")
-include(":core:feature-toggles")
 include(":features:splash")
 include(":design")
-include(":plugins")
+include(":core:feature-toggles")
+include(":core:utils")
+include(":navigation")
+include(":features:main")
