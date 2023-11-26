@@ -29,5 +29,9 @@ gradlePlugin {
             id = "conventionPluginsApp.android.library"
             implementationClass = "plugins.AndroidLibConventionPlugin"
         }
+        register("androidPresentationFeature") {
+            id = "conventionPluginsApp.android.presentationFeature"
+            implementationClass = "plugins.AndroidPresentationFeatureConventionPlugin"
+        }
     }
 }

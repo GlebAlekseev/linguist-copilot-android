@@ -24,6 +24,8 @@ internal fun Project.configureAndroidKotlin(
         }
         packaging.resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
 
+        buildFeatures.viewBinding = true
+
         dependencies {
             add("implementation", versionCatalog().findLibrary("core-ktx").get())
             add("implementation", versionCatalog().findLibrary("appcompat").get())
