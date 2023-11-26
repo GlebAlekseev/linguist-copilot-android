@@ -9,4 +9,6 @@ android {
 
 dependencies {
     implementation(libs.material)
+    implementation(libs.gson.converter)
+    implementation(project(":core:utils"))
 }
