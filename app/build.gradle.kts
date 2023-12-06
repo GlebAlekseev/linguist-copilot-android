@@ -16,4 +16,5 @@ dependencies {
     implementation(project(":navigation"))
     implementation(project(":features:splash"))
     implementation(project(":features:main"))
+    implementation(project(":features:reader"))
 }

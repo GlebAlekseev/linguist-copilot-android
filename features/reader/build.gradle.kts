@@ -2,11 +2,10 @@
 plugins {
     id("conventionPluginsApp.android.library")
     id("conventionPluginsApp.android.library.presentationFeature")
-    id("conventionPluginsApp.android.library.compose")
 }
 
 android {
-    namespace = "pro.linguistcopilot.features.main"
+    namespace = "pro.linguistcopilot.features.reader"
 }
 
 dependencies {

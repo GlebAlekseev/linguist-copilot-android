@@ -18,4 +18,15 @@
         android:id="@+id/mainFragment"
         android:name="pro.linguistcopilot.features.main.MainFragment"
         android:label="MainFragment" />
+
+
+    <fragment
+        android:id="@+id/readerFragment"
+        android:name="pro.linguistcopilot.features.reader.ReaderFragment"
+        android:label="ReaderFragment" >
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_to_readerFragment"
+        app:destination="@id/readerFragment" />
 </navigation>
