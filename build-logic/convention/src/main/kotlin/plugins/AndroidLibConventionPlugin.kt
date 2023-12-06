@@ -18,7 +18,7 @@ class AndroidLibConventionPlugin : Plugin<Project> {
             extensions.configure<LibraryExtension> {
                 configureAndroidKotlin(this)
                 defaultConfig.apply {
-                    targetSdk = Config.android.targetSdkVersion
+                    testOptions.targetSdk = Config.android.targetSdkVersion
                 }
                 configureBuildTypes(this)
             }
