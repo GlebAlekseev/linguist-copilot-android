@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/readerFragment"
-        android:name="pro.linguistcopilot.features.reader.ReaderFragment"
+        android:name="pro.linguistcopilot.features.reader.presentation.fragment.ReaderFragment"
         android:label="ReaderFragment" >
     </fragment>
 

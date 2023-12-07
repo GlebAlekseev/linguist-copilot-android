@@ -12,5 +12,6 @@ dependencies {
     implementation(libs.material)
     implementation(project(":navigation"))
     implementation(project(":core:utils"))
+    implementation(project(":design"))
     implementation(project(":features:reader:domain"))
 }
