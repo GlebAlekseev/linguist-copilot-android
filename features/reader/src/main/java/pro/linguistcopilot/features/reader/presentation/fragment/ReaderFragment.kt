@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import io.legado.app.data.entities.Book
+import io.legado.app.model.localBook.EpubFile
 import pro.linguistcopilot.core.utils.FragmentWithBinding
 import pro.linguistcopilot.core.utils.ILogger
 import pro.linguistcopilot.core.utils.di.findDependencies
@@ -12,8 +14,6 @@ import pro.linguistcopilot.features.reader.databinding.FragmentReaderBinding
 import pro.linguistcopilot.features.reader.di.DaggerReaderComponent
 import pro.linguistcopilot.features.reader.di.ReaderComponent
 import pro.linguistcopilot.features.reader.di.ReaderViewSubcomponent
-import pro.linguistcopilot.features.reader.domain.Book
-import pro.linguistcopilot.features.reader.domain.Book.Companion.bookInfo
 import pro.linguistcopilot.features.reader.domain.BookUrlArg
 import pro.linguistcopilot.features.reader.presentation.viewmodel.ReaderViewModel
 import pro.linguistcopilot.navigation.navigationData
@@ -43,16 +43,33 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val bookUrlArg = (navigationData as? BookUrlArg) ?: return
+
+
         val book = Book(
-            url = bookUrlArg.bookUrl,
-            bookType = Book.EPUB,
-            createdAt = System.currentTimeMillis(),
-            changedAt = System.currentTimeMillis()
+            bookUrl = bookUrlArg.bookUrl
         )
-        val bookInfo = book.bookInfo()
-        logger.put("default message")
-        logger.put("error message", IllegalStateException("bad state 1"))
-        logger.put("toast message", isDisplayToast = true)
+        val defaultBookDir = bookUrlArg.bookUrl.toString()
+        val importBookDir = bookUrlArg.bookUrl.toString()
+        val chapterList = EpubFile.getChapterList(
+            book = book,
+            defaultBookDir = defaultBookDir,
+            importBookDir = importBookDir,
+        )
+
+        chapterList.forEach {
+            val content = EpubFile.getContent(
+                book = book,
+                chapter = it,
+                defaultBookDir = defaultBookDir,
+                importBookDir = importBookDir,
+            )
+            println(">>>>>1 \n$it")
+            println(">>>>>2 \n$content")
+        }
+        println(chapterList)
+//        logger.put("default message")
+//        logger.put("error message", IllegalStateException("bad state 1"))
+//        logger.put("toast message", isDisplayToast = true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
