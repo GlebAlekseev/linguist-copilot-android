@@ -2,14 +2,12 @@ package pro.linguistcopilot.features.reader.presentation.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import pro.linguistcopilot.core.utils.FragmentWithBinding
+import pro.linguistcopilot.core.utils.ILogger
 import pro.linguistcopilot.core.utils.di.findDependencies
-import pro.linguistcopilot.features.reader.R
 import pro.linguistcopilot.features.reader.databinding.FragmentReaderBinding
 import pro.linguistcopilot.features.reader.di.DaggerReaderComponent
 import pro.linguistcopilot.features.reader.di.ReaderComponent
@@ -27,6 +25,9 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
     private lateinit var readerViewModel: ReaderViewModel
     private var fragmentComponent: ReaderComponent? = null
     private var fragmentViewComponent: ReaderViewSubcomponent? = null
+
+    @Inject
+    lateinit var logger: ILogger
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,13 +50,9 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
             changedAt = System.currentTimeMillis()
         )
         val bookInfo = book.bookInfo()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_reader, container, false)
+        logger.put("default message")
+        logger.put("error message", IllegalStateException("bad state 1"))
+        logger.put("toast message", isDisplayToast = true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,13 +62,13 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
             .binding(binding)
             .navController(findNavController())
             .readerViewModel(readerViewModel)
-            .fragmentManager(parentFragmentManager)
             .lifecycleOwner(viewLifecycleOwner)
-            .todoItemsFragment(this)
+            .fragmentManager(parentFragmentManager)
+            .readerFragment(this)
             .context(requireContext())
             .build()
         super.onViewCreated(view, savedInstanceState)
-        fragmentViewComponent!!.viewController.setupViews()
+        fragmentViewComponent!!.viewController.viewCreated()
     }
 
     override fun onDestroyView() {

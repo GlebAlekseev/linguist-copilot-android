@@ -41,7 +41,7 @@ interface ReaderViewSubcomponent {
         fun fragmentManager(fragmentManager: FragmentManager): Builder
 
         @BindsInstance
-        fun todoItemsFragment(fragment: ReaderFragment): Builder
+        fun readerFragment(fragment: ReaderFragment): Builder
 
         @BindsInstance
         fun context(context: Context): Builder

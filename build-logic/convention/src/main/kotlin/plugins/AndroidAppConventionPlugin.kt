@@ -16,6 +16,7 @@ class AndroidAppConventionPlugin : Plugin<Project> {
                 apply("kotlin-android")
             }
             extensions.configure<ApplicationExtension> {
+                buildFeatures.buildConfig = true
                 defaultConfig.apply {
                     targetSdk = Config.android.targetSdkVersion
                     applicationId = Config.android.applicationId
