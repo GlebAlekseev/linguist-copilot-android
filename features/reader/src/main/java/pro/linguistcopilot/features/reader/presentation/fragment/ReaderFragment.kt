@@ -1,18 +1,17 @@
 package pro.linguistcopilot.features.reader.presentation.fragment
 
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import io.legado.app.data.entities.Book
-import io.legado.app.model.localBook.EpubFile
 import pro.linguistcopilot.core.utils.FragmentWithBinding
 import pro.linguistcopilot.core.utils.ILogger
 import pro.linguistcopilot.core.utils.di.findDependencies
+import pro.linguistcopilot.features.reader.core.BookReader
 import pro.linguistcopilot.features.reader.databinding.FragmentReaderBinding
 import pro.linguistcopilot.features.reader.di.DaggerReaderComponent
-import pro.linguistcopilot.features.reader.di.ReaderComponent
 import pro.linguistcopilot.features.reader.di.ReaderViewSubcomponent
 import pro.linguistcopilot.features.reader.domain.BookUrlArg
 import pro.linguistcopilot.features.reader.presentation.viewmodel.ReaderViewModel
@@ -20,60 +19,45 @@ import pro.linguistcopilot.navigation.navigationData
 import javax.inject.Inject
 
 class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReaderBinding::inflate) {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var readerViewModel: ReaderViewModel
-    private var fragmentComponent: ReaderComponent? = null
     private var fragmentViewComponent: ReaderViewSubcomponent? = null
 
     @Inject
     lateinit var logger: ILogger
 
+    @Inject
+    lateinit var bookReader: BookReader
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        fragmentComponent = DaggerReaderComponent.factory()
-            .create(findDependencies())
-            .apply {
-                inject(this@ReaderFragment)
-            }
+        val bookUrlArg = (navigationData as? BookUrlArg) ?: return
+
         readerViewModel =
-            ViewModelProvider(this, viewModelFactory)[ReaderViewModel::class.java]
+            ViewModelProvider(this)[ReaderViewModel::class.java]
+        if (readerViewModel.readerComponent == null) {
+            readerViewModel.readerComponent = DaggerReaderComponent.builder()
+                .dependencies(findDependencies())
+                .bookUrlArg(bookUrlArg)
+                .build()
+                .apply {
+                    inject(this@ReaderFragment)
+                }
+        }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val bookUrlArg = (navigationData as? BookUrlArg) ?: return
-
-
-        val book = Book(
-            bookUrl = bookUrlArg.bookUrl
-        )
-        val defaultBookDir = bookUrlArg.bookUrl.toString()
-        val importBookDir = bookUrlArg.bookUrl.toString()
-        val chapterList = EpubFile.getChapterList(
-            book = book,
-            defaultBookDir = defaultBookDir,
-            importBookDir = importBookDir,
-        )
-
-        chapterList.forEach {
-            val content = EpubFile.getContent(
-                book = book,
-                chapter = it,
-                defaultBookDir = defaultBookDir,
-                importBookDir = importBookDir,
-            )
-            println(">>>>>1 \n$it")
-            println(">>>>>2 \n$content")
+        bookReader.getChapters().forEach {
+            println(">>>>1 $it")
+            val content = bookReader.getContent(it)
+            println(">>>>2 $content")
         }
-        println(chapterList)
-//        logger.put("default message")
-//        logger.put("error message", IllegalStateException("bad state 1"))
-//        logger.put("toast message", isDisplayToast = true)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        fragmentViewComponent = fragmentComponent!!
+        fragmentViewComponent = readerViewModel.readerComponent!!
             .readerViewSubcomponentBuilder()
             .rootView(requireView())
             .binding(binding)
@@ -86,6 +70,10 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
             .build()
         super.onViewCreated(view, savedInstanceState)
         fragmentViewComponent!!.viewController.viewCreated()
+
+        val inputStream = bookReader.getImage("cover.jpeg")
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+        binding.imageView.setImageBitmap(bitmap)
     }
 
     override fun onDestroyView() {

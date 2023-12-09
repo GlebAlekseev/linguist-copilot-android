@@ -1,13 +1,10 @@
-package pro.linguistcopilot.features.reader.core.book
+package pro.linguistcopilot.features.reader.core
 
 import cn.hutool.crypto.digest.DigestUtil
 import cn.hutool.crypto.digest.Digester
 import java.io.InputStream
 import kotlin.concurrent.getOrSet
 
-/**
- * 将字符串转化为MD5
- */
 @Suppress("unused")
 object MD5Utils {
 

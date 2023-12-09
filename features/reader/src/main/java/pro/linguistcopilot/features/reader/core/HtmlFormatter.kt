@@ -1,4 +1,4 @@
-package pro.linguistcopilot.features.reader.core.book
+package pro.linguistcopilot.features.reader.core
 
 import java.net.URL
 import java.util.regex.Pattern
@@ -33,8 +33,6 @@ object HtmlFormatter {
     fun formatKeepImg(html: String?, redirectUrl: URL? = null): String {
         html ?: return ""
         val keepImgHtml = format(html, notImgHtmlRegex)
-
-        //正则的“|”处于顶端而不处于（）中时，具有类似||的熔断效果，故以此机制简化原来的代码
         val matcher = formatImagePattern.matcher(keepImgHtml)
         var appendPos = 0
         val sb = StringBuilder()
