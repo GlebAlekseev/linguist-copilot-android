@@ -1,7 +1,6 @@
 package pro.linguistcopilot.features.reader.presentation.fragment
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +13,8 @@ import pro.linguistcopilot.features.reader.databinding.FragmentReaderBinding
 import pro.linguistcopilot.features.reader.di.DaggerReaderComponent
 import pro.linguistcopilot.features.reader.di.ReaderViewSubcomponent
 import pro.linguistcopilot.features.reader.domain.BookUrlArg
+import pro.linguistcopilot.features.reader.presentation.view.ReadBook
+import pro.linguistcopilot.features.reader.presentation.view.delegate.NoAnimPageDelegate
 import pro.linguistcopilot.features.reader.presentation.viewmodel.ReaderViewModel
 import pro.linguistcopilot.navigation.navigationData
 import javax.inject.Inject
@@ -45,17 +46,6 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
         }
     }
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bookReader.getChapters().forEach {
-            println(">>>>1 $it")
-            val content = bookReader.getContent(it)
-            println(">>>>2 $content")
-        }
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         fragmentViewComponent = readerViewModel.readerComponent!!
             .readerViewSubcomponentBuilder()
@@ -71,9 +61,8 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
         super.onViewCreated(view, savedInstanceState)
         fragmentViewComponent!!.viewController.viewCreated()
 
-        val inputStream = bookReader.getImage("cover.jpeg")
-        val bitmap = BitmapFactory.decodeStream(inputStream)
-        binding.imageView.setImageBitmap(bitmap)
+        binding.readView.readBook = ReadBook(bookReader)
+        binding.readView.pageDelegate = NoAnimPageDelegate(binding.readView)
     }
 
     override fun onDestroyView() {

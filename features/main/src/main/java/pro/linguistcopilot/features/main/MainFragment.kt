@@ -51,11 +51,7 @@ class MainFragment : Fragment() {
                     verticalArrangement = Arrangement.Center
                 ) {
                     Button(onClick = {
-                        navigate(
-                            actionId = R.id.action_global_to_readerFragment,
-                            data = BookUrlArg("uri".toString())
-                        )
-//                        chooseEpubFile()
+                        chooseEpubFile()
                     }) {
                         Text(text = "Открыть epub в читалке")
                     }
