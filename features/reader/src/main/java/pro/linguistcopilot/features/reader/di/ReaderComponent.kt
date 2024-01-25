@@ -13,8 +13,6 @@ import pro.linguistcopilot.features.reader.presentation.fragment.ReaderFragment
 )
 interface ReaderComponent {
     fun inject(fragment: ReaderFragment)
-    fun readerViewSubcomponentBuilder(): ReaderViewSubcomponent.Builder
-
     @Component.Builder
     interface Builder {
         @BindsInstance

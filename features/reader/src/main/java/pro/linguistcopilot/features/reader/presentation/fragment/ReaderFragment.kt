@@ -3,14 +3,13 @@ package pro.linguistcopilot.features.reader.presentation.fragment
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.compose.material3.Text
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import pro.linguistcopilot.core.utils.FragmentWithBinding
 import pro.linguistcopilot.core.utils.ILogger
 import pro.linguistcopilot.core.utils.di.findDependencies
 import pro.linguistcopilot.features.reader.databinding.FragmentReaderBinding
 import pro.linguistcopilot.features.reader.di.DaggerReaderComponent
-import pro.linguistcopilot.features.reader.di.ReaderViewSubcomponent
 import pro.linguistcopilot.features.reader.domain.BookUrlArg
 import pro.linguistcopilot.features.reader.presentation.viewmodel.ReaderViewModel
 import pro.linguistcopilot.navigation.navigationData
@@ -18,7 +17,6 @@ import javax.inject.Inject
 
 class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReaderBinding::inflate) {
     private lateinit var readerViewModel: ReaderViewModel
-    private var fragmentViewComponent: ReaderViewSubcomponent? = null
 
     @Inject
     lateinit var logger: ILogger
@@ -41,23 +39,13 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        fragmentViewComponent = readerViewModel.readerComponent!!
-            .readerViewSubcomponentBuilder()
-            .rootView(requireView())
-            .binding(binding)
-            .navController(findNavController())
-            .readerViewModel(readerViewModel)
-            .lifecycleOwner(viewLifecycleOwner)
-            .fragmentManager(parentFragmentManager)
-            .readerFragment(this)
-            .context(requireContext())
-            .build()
         super.onViewCreated(view, savedInstanceState)
-        fragmentViewComponent!!.viewController.viewCreated()
+        binding.root.setContent {
+            Text(text = "reader")
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        fragmentViewComponent = null
     }
 }

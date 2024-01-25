@@ -2,7 +2,7 @@
 plugins {
     id("conventionPluginsApp.android.library")
     id("conventionPluginsApp.android.library.presentationFeature")
-    id("kotlin-parcelize")
+    id("conventionPluginsApp.android.library.compose")
 }
 
 android {
