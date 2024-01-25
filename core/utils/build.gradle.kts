@@ -10,4 +10,5 @@ android {
 dependencies {
     implementation(libs.material)
     implementation(libs.dagger)
+    implementation(libs.hutool.crypto)
 }

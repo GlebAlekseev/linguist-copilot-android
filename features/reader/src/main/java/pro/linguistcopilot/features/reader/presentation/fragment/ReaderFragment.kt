@@ -8,13 +8,10 @@ import androidx.navigation.fragment.findNavController
 import pro.linguistcopilot.core.utils.FragmentWithBinding
 import pro.linguistcopilot.core.utils.ILogger
 import pro.linguistcopilot.core.utils.di.findDependencies
-import pro.linguistcopilot.features.reader.core.BookReader
 import pro.linguistcopilot.features.reader.databinding.FragmentReaderBinding
 import pro.linguistcopilot.features.reader.di.DaggerReaderComponent
 import pro.linguistcopilot.features.reader.di.ReaderViewSubcomponent
 import pro.linguistcopilot.features.reader.domain.BookUrlArg
-import pro.linguistcopilot.features.reader.presentation.view.ReadBook
-import pro.linguistcopilot.features.reader.presentation.view.delegate.NoAnimPageDelegate
 import pro.linguistcopilot.features.reader.presentation.viewmodel.ReaderViewModel
 import pro.linguistcopilot.navigation.navigationData
 import javax.inject.Inject
@@ -25,9 +22,6 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
 
     @Inject
     lateinit var logger: ILogger
-
-    @Inject
-    lateinit var bookReader: BookReader
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -60,9 +54,6 @@ class ReaderFragment : FragmentWithBinding<FragmentReaderBinding>(FragmentReader
             .build()
         super.onViewCreated(view, savedInstanceState)
         fragmentViewComponent!!.viewController.viewCreated()
-
-        binding.readView.readBook = ReadBook(bookReader)
-        binding.readView.pageDelegate = NoAnimPageDelegate(binding.readView)
     }
 
     override fun onDestroyView() {

@@ -13,11 +13,7 @@ internal fun Project.configureAndroidKotlin(
     with(extension) {
         namespace = Config.android.nameSpace
         compileSdk = Config.android.compileSdkVersion
-        defaultConfig.apply {
-            minSdk = Config.android.minSdkVersion
-            testInstrumentationRunner = "androidx.test.runner.AndroidJunitRunner"
-            vectorDrawables.useSupportLibrary = true
-        }
+
         compileOptions {
             sourceCompatibility = Config.jvm.javaVersion
             targetCompatibility = Config.jvm.javaVersion
@@ -31,12 +27,18 @@ internal fun Project.configureAndroidKotlin(
         }
 
         dependencies {
+            add("implementation", versionCatalog().findLibrary("splitties-appctx").get())
             add("implementation", versionCatalog().findLibrary("core-ktx").get())
             add("implementation", versionCatalog().findLibrary("appcompat").get())
             add("implementation", versionCatalog().findLibrary("androidx-lifecycle-runtime-ktx").get())
             add("testImplementation", versionCatalog().findLibrary("junit").get())
             add("androidTestImplementation", versionCatalog().findLibrary("androidx-test-ext-junit").get())
             add("androidTestImplementation", versionCatalog().findLibrary("espresso-core").get())
+        }
+        defaultConfig.apply {
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            vectorDrawables.useSupportLibrary = true
+            minSdk = Config.android.minSdkVersion
         }
     }
     tasks.withType<KotlinCompile>().configureEach {

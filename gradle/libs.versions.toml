@@ -17,6 +17,9 @@ navigation = "2.7.5"
 lifecycle = "2.6.2"
 dagger = "2.48"
 gson-converter = "2.10.1"
+hutool-crypto = "5.8.22"
+jsoup = "1.17.1"
+splitties = "3.0.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -45,6 +48,9 @@ lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-kt
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 gson-converter = { group = "com.google.code.gson", name = "gson", version.ref = "gson-converter" }
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "org-jetbrains-kotlin-jvm" }
+hutool-crypto = { group = "cn.hutool", name = "hutool-crypto", version.ref = "hutool-crypto" }
+jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
+splitties-appctx = { group = "com.louiscad.splitties", name = "splitties-appctx", version.ref = "splitties" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }

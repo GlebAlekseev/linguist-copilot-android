@@ -5,9 +5,4 @@
     android:layout_height="match_parent"
     tools:context=".presentation.fragment.ReaderFragment">
 
-
-    <pro.linguistcopilot.features.reader.presentation.view.ReadView
-        android:id="@+id/readView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </FrameLayout>
