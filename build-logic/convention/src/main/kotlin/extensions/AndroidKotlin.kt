@@ -18,7 +18,6 @@ internal fun Project.configureAndroidKotlin(
             sourceCompatibility = Config.jvm.javaVersion
             targetCompatibility = Config.jvm.javaVersion
         }
-        packaging.resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
 
         buildFeatures.viewBinding = true
 

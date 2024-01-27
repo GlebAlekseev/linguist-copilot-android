@@ -37,5 +37,9 @@ gradlePlugin {
             id = "conventionPluginsApp.android.library.compose"
             implementationClass = "plugins.AndroidComposeConventionPlugin"
         }
+        register("androidComposeMetrics") {
+            id = "conventionPluginsApp.android.library.compose.metrics"
+            implementationClass = "plugins.AndroidComposeMetricsConventionPlugin"
+        }
     }
 }
