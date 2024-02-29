@@ -1,13 +1,12 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("conventionPluginsApp.android.library")
+    id("linguistcopilot.android.library")
 }
 
-android {
-    namespace = "pro.linguistcopilot.core.book"
-}
 
 dependencies {
     implementation(project(":core:utils"))
     implementation(libs.jsoup)
+    implementation(libs.hutool.crypto)
+    implementation(libs.splitties.appCtx)
 }

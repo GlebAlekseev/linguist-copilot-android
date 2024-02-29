@@ -1,3 +1,4 @@
+@file:Suppress("UnstableApiUsage")
 pluginManagement {
     repositories {
         google()
@@ -17,12 +18,8 @@ dependencyResolutionManagement {
 rootProject.name = "Linguist Copilot"
 
 include(":app")
-include(":features:splash")
-include(":design")
-include(":core:feature-toggles")
 include(":core:utils")
 include(":core:book")
-include(":navigation")
-include(":features:main")
-include(":features:reader")
-include(":features:reader:domain")
+//include(":design")
+include(":design:res")
+include(":design:compose_ui")

@@ -1,14 +1,18 @@
-dependencyResolutionManagement {
+@file:Suppress("UnstableApiUsage")
+pluginManagement {
     repositories {
+        gradlePluginPortal()
         google()
         mavenCentral()
-    }
-    versionCatalogs {
-        create("libs") {
-            from(files("../gradle/libs.versions.toml"))
-        }
+        maven(url = "https://jitpack.io")
     }
 }
 
-rootProject.name = "build-logic"
-include(":convention")
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven(url = "https://jitpack.io")
+    }
+}

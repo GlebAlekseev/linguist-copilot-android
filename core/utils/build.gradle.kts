@@ -1,10 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("conventionPluginsApp.android.library")
-}
+    id("linguistcopilot.android.library")
 
-android {
-    namespace = "pro.linguistcopilot.core.utils"
 }
 
 dependencies {
