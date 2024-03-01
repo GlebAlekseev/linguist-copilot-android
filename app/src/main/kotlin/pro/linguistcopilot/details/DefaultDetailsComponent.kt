@@ -3,7 +3,6 @@ package pro.linguistcopilot.details
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.MutableValue
 import com.arkivanov.decompose.value.Value
-import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import com.arkivanov.essenty.instancekeeper.getOrCreate
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -11,10 +10,7 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import pro.linguistcopilot.Item
-import vivid.money.elmslie.core.store.DefaultActor
-import vivid.money.elmslie.core.store.ElmStore
-import vivid.money.elmslie.core.store.StateReducer
-import vivid.money.elmslie.core.store.Store
+import pro.linguistcopilot.core.utils.elmslie_decompose.RetainedElmStore
 import vivid.money.elmslie.core.store.dsl_reducer.ScreenDslReducer
 import vivid.money.elmslie.coroutines.Actor
 import javax.inject.Inject
@@ -68,7 +64,6 @@ class TestActor @Inject constructor() : Actor<TestCommand, TestEvent.Internal> {
             }.mapEvents(TestEvent.Internal.FinishLoading, TestEvent.Internal.ErrorLoading)
         }
     }
-
 }
 
 class DefaultDetailsComponent @AssistedInject constructor(
@@ -105,18 +100,6 @@ class DefaultDetailsComponent @AssistedInject constructor(
 
     }
 
-    class RetainedElmStore<Event : Any, State : Any, Effect : Any, Command : Any>(
-        initialState: State,
-        reducer: StateReducer<Event, State, Effect, Command>,
-        actor: Actor<Command, out Event>,
-        startEvent: Event? = null,
-    ) : Store<Event, Effect, State> by ElmStore(
-        initialState = initialState,
-        reducer = reducer,
-        actor = actor.toDefaultActor(),
-        startEvent = startEvent,
-    ), InstanceKeeper.Instance
-
     @AssistedFactory
     interface Factory : DetailsComponent.Factory {
         override fun invoke(
@@ -127,5 +110,3 @@ class DefaultDetailsComponent @AssistedInject constructor(
     }
 }
 
-fun <Command : Any, Event : Any> Actor<Command, Event>.toDefaultActor() =
-    DefaultActor<Command, Event> { command -> execute(command) }
