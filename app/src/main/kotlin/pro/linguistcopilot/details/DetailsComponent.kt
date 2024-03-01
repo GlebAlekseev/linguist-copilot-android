@@ -14,6 +14,7 @@ interface DetailsComponent {
     val item: Value<Item>
 
     fun onCloseClicked()
+    fun navigateTo()
 
     fun interface Factory {
         operator fun invoke(
