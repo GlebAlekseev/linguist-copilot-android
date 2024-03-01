@@ -1,6 +1,5 @@
 buildscript {
     dependencies {
-        // specify android gradle plugin version in versions catalog
         classpath(libs.agp)
     }
 }

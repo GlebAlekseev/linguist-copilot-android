@@ -1,6 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id("linguistcopilot.android.application")
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -16,6 +17,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.decompose)
+    implementation(libs.decompose.extensionsCompose)
     implementation(libs.androidx.coreKtx)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)

@@ -111,7 +111,7 @@ vivid-elmslieAndroid = { module = "com.github.vivid-money.elmslie:elmslie-androi
 vivid-elmslieCoroutines = { module = "com.github.vivid-money.elmslie:elmslie-coroutines", version.ref = "elmslie" }
 
 # Decompose
-decompose-decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
+decompose = { group = "com.arkivanov.decompose", name = "decompose", version.ref = "decompose" }
 decompose-extensionsCompose = { group = "com.arkivanov.decompose", name = "extensions-compose-jetpack", version.ref = "decompose" }
 
 # Coroutines
@@ -130,6 +130,7 @@ coil = { module = "io.coil-kt:coil", version = "2.2.1" }
 
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradle-android-cacheFix = { id = "org.gradle.android.cache-fix", version = "2.7.3" }
