@@ -15,10 +15,16 @@ class MainActivity : AppCompatActivity() {
         (this.applicationContext as App).appComponent.inject(this)
         super.onCreate(savedInstanceState)
 
-        setContentView(ComposeView(this).apply {
-            setContent {
-                RootContent(component = rootComponentFactory.invoke(defaultComponentContext()))
+        setContentView(
+            ComposeView(this).apply {
+                setContent {
+                    RootContent(
+                        component = rootComponentFactory.invoke(
+                            defaultComponentContext()
+                        )
+                    )
+                }
             }
-        })
+        )
     }
 }

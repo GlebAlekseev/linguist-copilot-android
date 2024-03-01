@@ -19,6 +19,8 @@ android {
 dependencies {
     implementation(libs.decompose)
     implementation(libs.decompose.extensionsCompose)
+    implementation(libs.elmslie.core)
+    implementation(libs.elmslie.coroutines)
     implementation(libs.androidx.coreKtx)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
