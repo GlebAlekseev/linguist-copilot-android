@@ -16,6 +16,7 @@ import pro.linguistcopilot.feature.auth.AuthComponent
 import pro.linguistcopilot.feature.bookDescription.BookDescriptionComponent
 import pro.linguistcopilot.feature.bookDownload.BookDownloadComponent
 import pro.linguistcopilot.feature.bookReader.BookReaderComponent
+import pro.linguistcopilot.feature.bookSearch.BookSearchComponent
 import pro.linguistcopilot.feature.content.ContentComponent
 import pro.linguistcopilot.feature.onboarding.OnboardingComponent
 
@@ -26,6 +27,7 @@ class DefaultRootComponent @AssistedInject constructor(
     private val bookDownloadFactory: BookDownloadComponent.Factory,
     private val bookDescriptionFactory: BookDescriptionComponent.Factory,
     private val bookReaderFactory: BookReaderComponent.Factory,
+    private val bookSearchFactory: BookSearchComponent.Factory,
     @Assisted componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
@@ -49,7 +51,19 @@ class DefaultRootComponent @AssistedInject constructor(
             )
 
             is Config.BookReader -> RootComponent.Child.BookReader(bookReaderComponent(context))
+            is Config.BookSearch -> RootComponent.Child.BookSearch(bookSearchComponent(context))
         }
+
+    private fun bookSearchComponent(context: ComponentContext): BookSearchComponent =
+        bookSearchFactory(
+            componentContext = context,
+            onCloseBookSearch = {
+                navigation.pop()
+            },
+            onOpenBookDescription = {
+                navigation.push(Config.BookDescription)
+            }
+        )
 
     private fun bookReaderComponent(context: ComponentContext): BookReaderComponent =
         bookReaderFactory(
@@ -88,6 +102,9 @@ class DefaultRootComponent @AssistedInject constructor(
         },
         onOpenBookDescription = {
             navigation.push(Config.BookDescription)
+        },
+        onOpenBookSearch = {
+            navigation.push(Config.BookSearch)
         }
     )
 
@@ -126,6 +143,9 @@ class DefaultRootComponent @AssistedInject constructor(
 
         @Serializable
         data object BookReader : Config
+
+        @Serializable
+        data object BookSearch : Config
     }
 
     @AssistedFactory

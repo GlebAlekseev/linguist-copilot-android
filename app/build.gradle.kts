@@ -37,4 +37,5 @@ dependencies {
     implementation(project(":feature:bookDownload:impl"))
     implementation(project(":feature:bookDescription:impl"))
     implementation(project(":feature:bookReader:impl"))
+    implementation(project(":feature:bookSearch:impl"))
 }

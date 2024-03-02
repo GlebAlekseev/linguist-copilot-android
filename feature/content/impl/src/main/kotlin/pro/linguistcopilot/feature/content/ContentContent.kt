@@ -31,7 +31,10 @@ import pro.linguistcopilot.feature.content.profile.ProfileContent
 fun ContentContent(component: ContentComponent) {
     val selectedIndex by component.selectedIndex.subscribeAsState()
     Column {
-        TopAppBar(component.onNavigateToAuth)
+        TopAppBar(
+            onNavigateToAuth = component.onNavigateToAuth,
+            onOpenBookSearch = component.onOpenBookSearch
+        )
 
         Pages(
             modifier = Modifier.weight(1f),
@@ -57,7 +60,7 @@ fun ContentContent(component: ContentComponent) {
 
 
 @Composable
-fun TopAppBar(onNavigateToAuth: () -> Unit) {
+fun TopAppBar(onNavigateToAuth: () -> Unit, onOpenBookSearch: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -67,6 +70,9 @@ fun TopAppBar(onNavigateToAuth: () -> Unit) {
         Text(text = "Linguist Copilot")
         Button(onClick = onNavigateToAuth) {
             Text(text = "Авторизоваться")
+        }
+        Button(onClick = onOpenBookSearch) {
+            Text(text = "Поиск")
         }
     }
 }

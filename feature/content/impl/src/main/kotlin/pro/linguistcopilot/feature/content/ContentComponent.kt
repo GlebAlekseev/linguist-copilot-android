@@ -13,6 +13,7 @@ import pro.linguistcopilot.feature.content.profile.ProfileComponent
 @Stable
 interface ContentComponent {
     val onNavigateToAuth: () -> Unit
+    val onOpenBookSearch: () -> Unit
     val selectedIndex: Value<Int>
     val contentPages: Value<ChildPages<*, Page>>
     val onSelectLibrary: () -> Unit
@@ -32,6 +33,7 @@ interface ContentComponent {
             onNavigateToAuth: () -> Unit,
             onBookDownload: () -> Unit,
             onOpenBookDescription: () -> Unit,
+            onOpenBookSearch: () -> Unit,
         ): ContentComponent
     }
 }

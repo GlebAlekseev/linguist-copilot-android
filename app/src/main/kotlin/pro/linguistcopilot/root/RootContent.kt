@@ -12,6 +12,7 @@ import pro.linguistcopilot.feature.auth.AuthContent
 import pro.linguistcopilot.feature.bookDescription.BookDescriptionContent
 import pro.linguistcopilot.feature.bookDownload.BookDownloadContent
 import pro.linguistcopilot.feature.bookReader.BookReaderContent
+import pro.linguistcopilot.feature.bookSearch.BookSearchContent
 import pro.linguistcopilot.feature.content.ContentContent
 import pro.linguistcopilot.feature.onboarding.OnboardingContent
 
@@ -29,6 +30,7 @@ fun RootContent(component: RootComponent) {
             is RootComponent.Child.BookDownload -> BookDownloadContent(component = child.bookDownloadComponent)
             is RootComponent.Child.BookDescription -> BookDescriptionContent(component = child.bookDescriptionComponent)
             is RootComponent.Child.BookReader -> BookReaderContent(component = child.bookReaderComponent)
+            is RootComponent.Child.BookSearch -> BookSearchContent(component = child.bookSearchComponent)
         }
     }
 }
