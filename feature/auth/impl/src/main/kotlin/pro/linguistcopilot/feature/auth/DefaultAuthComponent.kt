@@ -7,14 +7,14 @@ import dagger.assisted.AssistedInject
 
 class DefaultAuthComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
-    @Assisted onCloseAuth: () -> Unit
+    @Assisted("onCloseAuth") override val onCloseAuth: () -> Unit
 ) : AuthComponent, ComponentContext by componentContext {
 
     @AssistedFactory
     interface Factory : AuthComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            onCloseAuth: () -> Unit
+            @Assisted("onCloseAuth") onCloseAuth: () -> Unit
         ): DefaultAuthComponent
     }
 }

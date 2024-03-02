@@ -11,11 +11,13 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.serialization.Serializable
 import pro.linguistcopilot.feature.auth.AuthComponent
+import pro.linguistcopilot.feature.content.ContentComponent
 import pro.linguistcopilot.feature.onboarding.OnboardingComponent
 
 class DefaultRootComponent @AssistedInject constructor(
     private val onboardingFactory: OnboardingComponent.Factory,
     private val authFactory: AuthComponent.Factory,
+    private val contentFactory: ContentComponent.Factory,
     @Assisted componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
@@ -32,13 +34,21 @@ class DefaultRootComponent @AssistedInject constructor(
         when (config) {
             is Config.Onboarding -> RootComponent.Child.Onboarding(onboardingComponent(context))
             is Config.Auth -> RootComponent.Child.Auth(authComponent(context))
+            is Config.Content -> RootComponent.Child.Content(contentComponent(context))
         }
+
+    private fun contentComponent(context: ComponentContext): ContentComponent = contentFactory(
+        componentContext = context,
+        onNavigateToAuth = {
+            navigation.replaceAll(Config.Auth)
+        }
+    )
 
     private fun authComponent(context: ComponentContext): AuthComponent =
         authFactory(
             componentContext = context,
             onCloseAuth = {
-
+                navigation.replaceAll(Config.Content)
             }
         )
 
@@ -57,6 +67,9 @@ class DefaultRootComponent @AssistedInject constructor(
 
         @Serializable
         data object Auth : Config
+
+        @Serializable
+        data object Content : Config
     }
 
     @AssistedFactory
