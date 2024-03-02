@@ -1,20 +1,6 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("linguistcopilot.android.application")
-    id("linguistcopilot.kotlin.parcelize")
+    id("linguistcopilot.feature.impl")
     alias(libs.plugins.kotlin.serialization)
-}
-
-android {
-    namespace = "pro.linguistcopilot"
-
-    defaultConfig {
-        applicationId = "pro.linguistcopilot"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    packaging {
-        resources.excludes += setOf("META-INF/**")
-    }
 }
 
 dependencies {
@@ -28,5 +14,4 @@ dependencies {
     implementation(libs.androidx.appCompat)
     implementation(project(":core:utils"))
     implementation(project(":design:res"))
-    implementation(project(":feature:onboarding:impl"))
 }

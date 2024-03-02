@@ -1,4 +1,5 @@
 @file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         google()
@@ -22,7 +23,7 @@ rootProject.name = "Linguist Copilot"
 include(":app")
 include(":core:utils")
 include(":core:book")
-//include(":design")
 include(":design:res")
 include(":design:compose_ui")
-include(":feature")
+include(":feature:onboarding:impl")
+include(":feature:onboarding:api")
