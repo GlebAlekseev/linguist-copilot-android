@@ -8,12 +8,14 @@ import dagger.assisted.AssistedInject
 class DefaultMySourcesComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
     @Assisted("onBookDownload") override val onBookDownload: () -> Unit,
+    @Assisted("onOpenBookDescription") override val onOpenBookDescription: () -> Unit,
 ) : MySourcesComponent, ComponentContext by componentContext {
     @AssistedFactory
     interface Factory : MySourcesComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            @Assisted("onBookDownload") onBookDownload: () -> Unit
+            @Assisted("onBookDownload") onBookDownload: () -> Unit,
+            @Assisted("onOpenBookDescription") onOpenBookDescription: () -> Unit
         ): DefaultMySourcesComponent
     }
 }

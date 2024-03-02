@@ -30,7 +30,8 @@ interface ContentComponent {
         operator fun invoke(
             componentContext: ComponentContext,
             onNavigateToAuth: () -> Unit,
-            onBookDownload: () -> Unit
+            onBookDownload: () -> Unit,
+            onOpenBookDescription: () -> Unit,
         ): ContentComponent
     }
 }

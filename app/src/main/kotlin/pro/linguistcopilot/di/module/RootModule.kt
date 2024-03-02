@@ -3,6 +3,7 @@ package pro.linguistcopilot.di.module
 import dagger.Binds
 import dagger.Module
 import pro.linguistcopilot.feature.auth.di.AuthModule
+import pro.linguistcopilot.feature.bookDescription.di.BookDescriptionModule
 import pro.linguistcopilot.feature.bookDownload.di.BookDownloadModule
 import pro.linguistcopilot.feature.content.di.ContentModule
 import pro.linguistcopilot.feature.onboarding.di.OnboardingModule
@@ -14,7 +15,8 @@ import pro.linguistcopilot.root.RootComponent
         OnboardingModule::class,
         AuthModule::class,
         ContentModule::class,
-        BookDownloadModule::class
+        BookDownloadModule::class,
+        BookDescriptionModule::class
     ]
 )
 interface RootModule {

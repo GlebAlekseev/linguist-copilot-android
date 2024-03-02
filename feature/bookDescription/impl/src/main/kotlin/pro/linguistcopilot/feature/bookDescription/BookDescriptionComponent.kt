@@ -1,17 +1,19 @@
-package pro.linguistcopilot.feature.bookDownload
+package pro.linguistcopilot.feature.bookDescription
 
 import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.ComponentContext
 
 
 @Stable
-interface BookDownloadComponent {
+interface BookDescriptionComponent {
     val onCloseBookDownload: () -> Unit
+    val onOpenBookReader: () -> Unit
 
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            onCloseBookDownload: () -> Unit
-        ): BookDownloadComponent
+            onCloseBookDownload: () -> Unit,
+            onOpenBookReader: () -> Unit
+        ): BookDescriptionComponent
     }
 }

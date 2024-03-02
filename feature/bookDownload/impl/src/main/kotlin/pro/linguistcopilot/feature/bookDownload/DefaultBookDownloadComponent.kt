@@ -1,4 +1,4 @@
-package pro.linguistcopilot.feature.auth
+package pro.linguistcopilot.feature.bookDownload
 
 import com.arkivanov.decompose.ComponentContext
 import dagger.assisted.Assisted

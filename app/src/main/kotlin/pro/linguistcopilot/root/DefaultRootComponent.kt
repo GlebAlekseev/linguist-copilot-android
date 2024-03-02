@@ -13,15 +13,17 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.serialization.Serializable
 import pro.linguistcopilot.feature.auth.AuthComponent
-import pro.linguistcopilot.feature.auth.BookDownloadComponent
+import pro.linguistcopilot.feature.bookDescription.BookDescriptionComponent
+import pro.linguistcopilot.feature.bookDownload.BookDownloadComponent
 import pro.linguistcopilot.feature.content.ContentComponent
 import pro.linguistcopilot.feature.onboarding.OnboardingComponent
 
 class DefaultRootComponent @AssistedInject constructor(
-    private val bookDownloadFactory: BookDownloadComponent.Factory,
     private val onboardingFactory: OnboardingComponent.Factory,
     private val authFactory: AuthComponent.Factory,
     private val contentFactory: ContentComponent.Factory,
+    private val bookDownloadFactory: BookDownloadComponent.Factory,
+    private val bookDescriptionFactory: BookDescriptionComponent.Factory,
     @Assisted componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
@@ -40,7 +42,21 @@ class DefaultRootComponent @AssistedInject constructor(
             is Config.Auth -> RootComponent.Child.Auth(authComponent(context))
             is Config.Content -> RootComponent.Child.Content(contentComponent(context))
             is Config.BookDownload -> RootComponent.Child.BookDownload(bookDownloadComponent(context))
+            is Config.BookDescription -> RootComponent.Child.BookDescription(
+                bookDescriptionComponent(context)
+            )
         }
+
+    private fun bookDescriptionComponent(context: ComponentContext): BookDescriptionComponent =
+        bookDescriptionFactory(
+            componentContext = context,
+            onCloseBookDownload = {
+                navigation.pop()
+            },
+            onOpenBookReader = {
+//                navigation.push()
+            }
+        )
 
     private fun bookDownloadComponent(context: ComponentContext): BookDownloadComponent =
         bookDownloadFactory(
@@ -57,6 +73,9 @@ class DefaultRootComponent @AssistedInject constructor(
         },
         onBookDownload = {
             navigation.push(Config.BookDownload)
+        },
+        onOpenBookDescription = {
+            navigation.push(Config.BookDescription)
         }
     )
 
@@ -89,6 +108,9 @@ class DefaultRootComponent @AssistedInject constructor(
 
         @Serializable
         data object BookDownload : Config
+
+        @Serializable
+        data object BookDescription : Config
     }
 
     @AssistedFactory

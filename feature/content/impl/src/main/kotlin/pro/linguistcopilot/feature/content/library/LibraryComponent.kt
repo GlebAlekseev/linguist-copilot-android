@@ -26,7 +26,8 @@ interface LibraryComponent {
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            onBookDownload: () -> Unit
+            onBookDownload: () -> Unit,
+            onOpenBookDescription: () -> Unit,
         ): LibraryComponent
     }
 }

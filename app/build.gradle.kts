@@ -35,4 +35,5 @@ dependencies {
     implementation(project(":feature:auth:impl"))
     implementation(project(":feature:content:impl"))
     implementation(project(":feature:bookDownload:impl"))
+    implementation(project(":feature:bookDescription:impl"))
 }

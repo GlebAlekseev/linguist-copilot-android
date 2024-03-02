@@ -2,8 +2,8 @@ package pro.linguistcopilot.feature.bookDownload.di
 
 import dagger.Binds
 import dagger.Module
-import pro.linguistcopilot.feature.auth.BookDownloadComponent
-import pro.linguistcopilot.feature.auth.DefaultBookDownloadComponent
+import pro.linguistcopilot.feature.bookDownload.BookDownloadComponent
+import pro.linguistcopilot.feature.bookDownload.DefaultBookDownloadComponent
 
 @Module
 interface BookDownloadModule {

@@ -5,7 +5,8 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import pro.linguistcopilot.feature.auth.AuthComponent
-import pro.linguistcopilot.feature.auth.BookDownloadComponent
+import pro.linguistcopilot.feature.bookDescription.BookDescriptionComponent
+import pro.linguistcopilot.feature.bookDownload.BookDownloadComponent
 import pro.linguistcopilot.feature.content.ContentComponent
 import pro.linguistcopilot.feature.onboarding.OnboardingComponent
 
@@ -17,7 +18,8 @@ interface RootComponent {
         class Onboarding(val onboardingComponent: OnboardingComponent) : Child()
         class Auth(val authComponent: AuthComponent) : Child()
         class Content(val contentComponent: ContentComponent) : Child()
-        class BookDownload(val bookDownload: BookDownloadComponent) : Child()
+        class BookDownload(val bookDownloadComponent: BookDownloadComponent) : Child()
+        class BookDescription(val bookDescriptionComponent: BookDescriptionComponent) : Child()
     }
 
     fun interface Factory {

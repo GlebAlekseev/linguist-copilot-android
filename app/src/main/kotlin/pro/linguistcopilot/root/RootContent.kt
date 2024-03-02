@@ -9,7 +9,8 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
 import pro.linguistcopilot.feature.auth.AuthContent
-import pro.linguistcopilot.feature.auth.BookDownloadContent
+import pro.linguistcopilot.feature.bookDescription.BookDescriptionContent
+import pro.linguistcopilot.feature.bookDownload.BookDownloadContent
 import pro.linguistcopilot.feature.content.ContentContent
 import pro.linguistcopilot.feature.onboarding.OnboardingContent
 
@@ -24,7 +25,8 @@ fun RootContent(component: RootComponent) {
             is RootComponent.Child.Onboarding -> OnboardingContent(component = child.onboardingComponent)
             is RootComponent.Child.Auth -> AuthContent(component = child.authComponent)
             is RootComponent.Child.Content -> ContentContent(component = child.contentComponent)
-            is RootComponent.Child.BookDownload -> BookDownloadContent(component = child.bookDownload)
+            is RootComponent.Child.BookDownload -> BookDownloadContent(component = child.bookDownloadComponent)
+            is RootComponent.Child.BookDescription -> BookDescriptionContent(component = child.bookDescriptionComponent)
         }
     }
 }

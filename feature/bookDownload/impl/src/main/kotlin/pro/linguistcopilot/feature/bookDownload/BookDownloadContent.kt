@@ -1,4 +1,4 @@
-package pro.linguistcopilot.feature.auth
+package pro.linguistcopilot.feature.bookDownload
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button

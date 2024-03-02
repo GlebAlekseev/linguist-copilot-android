@@ -46,7 +46,8 @@ fun MySourcesContent(component: MySourcesComponent) {
             items(titles) {
                 Column(
                     verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.Start
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.clickable { component.onOpenBookDescription.invoke() }
                 ) {
                     Box(
                         Modifier
