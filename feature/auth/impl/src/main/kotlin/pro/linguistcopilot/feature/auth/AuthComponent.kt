@@ -1,8 +1,10 @@
 package pro.linguistcopilot.feature.auth
 
+import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.ComponentContext
 
 
+@Stable
 interface AuthComponent {
     val onCloseAuth: () -> Unit
 

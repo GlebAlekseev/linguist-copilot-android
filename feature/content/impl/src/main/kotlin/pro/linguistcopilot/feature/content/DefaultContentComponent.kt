@@ -2,12 +2,15 @@ package pro.linguistcopilot.feature.content
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
+import com.arkivanov.decompose.router.children.ChildNavState
 import com.arkivanov.decompose.router.pages.ChildPages
 import com.arkivanov.decompose.router.pages.Pages
 import com.arkivanov.decompose.router.pages.PagesNavigation
 import com.arkivanov.decompose.router.pages.childPages
+import com.arkivanov.decompose.router.pages.navigate
 import com.arkivanov.decompose.router.pages.select
 import com.arkivanov.decompose.value.Value
+import com.arkivanov.decompose.value.operator.map
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -25,6 +28,7 @@ class DefaultContentComponent @AssistedInject constructor(
     @Assisted("onNavigateToAuth") override val onNavigateToAuth: () -> Unit,
 ) : ContentComponent, ComponentContext by componentContext {
     private val navigation = PagesNavigation<Config>()
+    override val selectedIndex: Value<Int> get() = contentPages.map { it.selectedIndex }
 
     override val contentPages: Value<ChildPages<*, ContentComponent.Page>> =
         childPages(
@@ -40,9 +44,38 @@ class DefaultContentComponent @AssistedInject constructor(
                     selectedIndex = 0
                 )
             },
+            pageStatus = { index, pages ->
+                when (index) {
+                    pages.selectedIndex -> ChildNavState.Status.ACTIVE
+                    else -> ChildNavState.Status.INACTIVE
+                }
+            },
             handleBackButton = false,
             childFactory = ::child
         )
+
+    override val onSelectLibrary: () -> Unit = {
+        navigation.navigate {
+            it.copy(
+                selectedIndex = 0
+            )
+        }
+    }
+    override val onSelectOverview: () -> Unit = {
+        navigation.navigate {
+            it.copy(
+                selectedIndex = 1
+            )
+        }
+    }
+    override val onSelectProfile: () -> Unit = {
+        navigation.navigate {
+            it.copy(
+                selectedIndex = 2
+            )
+        }
+    }
+
 
     private fun child(config: Config, context: ComponentContext): ContentComponent.Page =
         when (config) {

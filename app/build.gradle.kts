@@ -12,8 +12,11 @@ android {
         applicationId = "pro.linguistcopilot"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+//    packaging {
+//        resources.excludes += setOf("META-INF/**")
+//    }
     packaging {
-        resources.excludes += setOf("META-INF/**")
+        resources.excludes += setOf("META-INF/INDEX.LIST")
     }
 }
 

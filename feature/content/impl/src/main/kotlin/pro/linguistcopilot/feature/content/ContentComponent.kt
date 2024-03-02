@@ -1,5 +1,6 @@
 package pro.linguistcopilot.feature.content
 
+import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.pages.ChildPages
@@ -8,12 +9,15 @@ import pro.linguistcopilot.feature.content.library.LibraryComponent
 import pro.linguistcopilot.feature.content.overview.OverviewComponent
 import pro.linguistcopilot.feature.content.profile.ProfileComponent
 
-
+@OptIn(ExperimentalDecomposeApi::class)
+@Stable
 interface ContentComponent {
     val onNavigateToAuth: () -> Unit
-
-    @OptIn(ExperimentalDecomposeApi::class)
+    val selectedIndex: Value<Int>
     val contentPages: Value<ChildPages<*, Page>>
+    val onSelectLibrary: () -> Unit
+    val onSelectOverview: () -> Unit
+    val onSelectProfile: () -> Unit
 
     sealed class Page {
         class Library(val libraryComponent: LibraryComponent) : Page()
