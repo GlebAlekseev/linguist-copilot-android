@@ -8,6 +8,7 @@ import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.jetpack.stack.animation.stackAnimation
+import pro.linguistcopilot.feature.auth.AuthContent
 import pro.linguistcopilot.feature.onboarding.OnboardingContent
 
 @Composable
@@ -19,6 +20,7 @@ fun RootContent(component: RootComponent) {
     ) {
         when (val child = it.instance) {
             is RootComponent.Child.Onboarding -> OnboardingContent(component = child.onboardingComponent)
+            is RootComponent.Child.Auth -> AuthContent(component = child.authComponent)
         }
     }
 }

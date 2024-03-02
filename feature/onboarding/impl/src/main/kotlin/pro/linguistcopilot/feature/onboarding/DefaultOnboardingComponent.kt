@@ -18,7 +18,7 @@ import pro.linguistcopilot.feature.onboarding.page.OnboardingPageComponent
 class DefaultOnboardingComponent @AssistedInject constructor(
     private val onboardingPageFactory: OnboardingPageComponent.Factory,
     @Assisted componentContext: ComponentContext,
-    @Assisted onCloseOnboarding: () -> Unit
+    @Assisted private val onCloseOnboarding: () -> Unit
 ) : OnboardingComponent, ComponentContext by componentContext {
 
     private val navigation = PagesNavigation<Config>()
@@ -43,9 +43,26 @@ class DefaultOnboardingComponent @AssistedInject constructor(
 
     private fun child(config: Config, context: ComponentContext): OnboardingPageComponent =
         when (config) {
-            Config.VocabularyFeature -> onboardingPageFactory.invoke(context, "$config", 2)
-            Config.TranslateFeature -> onboardingPageFactory.invoke(context, "$config", 1)
-            Config.Welcome -> onboardingPageFactory.invoke(context, "$config", 0)
+            Config.VocabularyFeature -> onboardingPageFactory.invoke(
+                context,
+                message = "$config",
+                index = 2,
+                onCloseOnboarding = onCloseOnboarding
+            )
+
+            Config.TranslateFeature -> onboardingPageFactory.invoke(
+                context,
+                message = "$config",
+                index = 1,
+                onCloseOnboarding = null
+            )
+
+            Config.Welcome -> onboardingPageFactory.invoke(
+                context,
+                message = "$config",
+                index = 0,
+                onCloseOnboarding = null
+            )
         }
 
     override fun selectPageByIndex(index: Int) {

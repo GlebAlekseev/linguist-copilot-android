@@ -10,6 +10,7 @@ class DefaultOnboardingPageComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
     @Assisted("message") override val message: String,
     @Assisted("index") override val index: Int,
+    @Assisted("onCloseOnboarding") override val onCloseOnboarding: (() -> Unit)?,
 ) : OnboardingPageComponent, ComponentContext by componentContext {
 
     @AssistedFactory
@@ -18,6 +19,7 @@ class DefaultOnboardingPageComponent @AssistedInject constructor(
             componentContext: ComponentContext,
             @Assisted("message") message: String,
             @Assisted("index") index: Int,
+            @Assisted("onCloseOnboarding") onCloseOnboarding: (() -> Unit)?
         ): DefaultOnboardingPageComponent
     }
 }

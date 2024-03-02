@@ -2,7 +2,9 @@ package pro.linguistcopilot.feature.onboarding.page
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,6 +22,13 @@ fun OnboardingPageContent(component: OnboardingPageComponent) {
                 colors.get(component.index)
             ), contentAlignment = Alignment.Center
     ) {
-        Text(text = component.message)
+        Column {
+            Text(text = component.message)
+            component.onCloseOnboarding?.let { onCloseOnboarding ->
+                Button(onClick = onCloseOnboarding) {
+                    Text(text = "Начать")
+                }
+            }
+        }
     }
 }

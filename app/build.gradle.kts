@@ -29,4 +29,5 @@ dependencies {
     implementation(project(":core:utils"))
     implementation(project(":design:res"))
     implementation(project(":feature:onboarding:impl"))
+    implementation(project(":feature:auth:impl"))
 }
