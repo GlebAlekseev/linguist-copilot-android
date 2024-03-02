@@ -1,4 +1,4 @@
-package pro.linguistcopilot.feature.onboarding
+package pro.linguistcopilot.feature.auth
 
 import org.junit.Test
 

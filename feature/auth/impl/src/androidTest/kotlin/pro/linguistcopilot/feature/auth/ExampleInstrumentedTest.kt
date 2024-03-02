@@ -1,4 +1,4 @@
-package pro.linguistcopilot.feature.onboarding
+package pro.linguistcopilot.feature.auth
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
