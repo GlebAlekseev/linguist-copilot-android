@@ -1,7 +1,5 @@
 package me.ag2s.base;
 
-import static me.ag2s.base.ThrowableUtils.rethrowAsIOException;
-
 import android.os.ParcelFileDescriptor;
 import android.system.ErrnoException;
 import android.system.OsConstants;
@@ -24,7 +22,7 @@ public final class PfdHelper {
         try {
             android.system.Os.lseek(pfd.getFileDescriptor(), pos, OsConstants.SEEK_SET);
         } catch (ErrnoException e) {
-            throw rethrowAsIOException(e);
+            throw ThrowableUtils.rethrowAsIOException(e);
         }
 
     }
@@ -33,7 +31,7 @@ public final class PfdHelper {
         try {
             return android.system.Os.lseek(pfd.getFileDescriptor(), 0, OsConstants.SEEK_CUR);
         } catch (ErrnoException e) {
-            throw rethrowAsIOException(e);
+            throw ThrowableUtils.rethrowAsIOException(e);
         }
     }
 
@@ -41,7 +39,7 @@ public final class PfdHelper {
         try {
             return android.system.Os.fstat(pfd.getFileDescriptor()).st_size; //android.system.Os.lseek(pfd.getFileDescriptor(), 0, OsConstants.SEEK_END);
         } catch (ErrnoException e) {
-            throw rethrowAsIOException(e);
+            throw ThrowableUtils.rethrowAsIOException(e);
         }
     }
 
@@ -49,7 +47,7 @@ public final class PfdHelper {
         try {
             return android.system.Os.read(pfd.getFileDescriptor(), b, off, len);
         } catch (ErrnoException e) {
-            throw rethrowAsIOException(e);
+            throw ThrowableUtils.rethrowAsIOException(e);
         }
     }
 

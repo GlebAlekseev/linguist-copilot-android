@@ -5,6 +5,9 @@ plugins {
 
 
 dependencies {
+    androidTestImplementation(libs.androidx.testExtJunit)
+    testImplementation(libs.junit)
+
     implementation(project(":core:utils"))
     implementation(libs.jsoup)
     implementation(libs.hutool.crypto)

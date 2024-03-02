@@ -25,8 +25,8 @@ import me.ag2s.epublib.domain.MediaTypes;
 import me.ag2s.epublib.domain.Resource;
 import me.ag2s.epublib.domain.TOCReference;
 import me.ag2s.epublib.domain.TableOfContents;
-import me.ag2s.epublib.util.ResourceUtil;
 import me.ag2s.epublib.util.StringUtil;
+import me.ag2s.epublib.util.ResourceUtil;
 
 /**
  * Writes the ncx document as defined by namespace http://www.daisy.org/z3986/2005/ncx/

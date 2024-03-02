@@ -2,8 +2,6 @@
 
 package me.ag2s.epublib.util.zip;
 
-import static me.ag2s.base.PfdHelper.seek;
-
 import android.os.ParcelFileDescriptor;
 
 import androidx.annotation.NonNull;
@@ -202,7 +200,7 @@ public class AndroidZipFile implements ZipConstants {
                 throw new ZipException
                         ("central directory not found, probably not a zip file: " + name);
             //raf.seek(pos--);
-            seek(pfd, pos--);
+            PfdHelper.seek(pfd, pos--);
         }
         //while (readLeInt(raf, ebs) != ENDSIG);
         while (readLeInt(pfd, ebs) != ENDSIG);
@@ -217,7 +215,7 @@ public class AndroidZipFile implements ZipConstants {
 
         entries = new HashMap<>(count + count / 2);
         //raf.seek(centralOffset);
-        seek(pfd, centralOffset);
+        PfdHelper.seek(pfd, centralOffset);
 
         byte[] buffer = new byte[16];
         for (int i = 0; i < count; i++) {
@@ -352,7 +350,7 @@ public class AndroidZipFile implements ZipConstants {
      */
     private long checkLocalHeader(AndroidZipEntry entry) throws IOException {
         synchronized (pfd) {
-            seek(pfd, entry.offset);
+            PfdHelper.seek(pfd, entry.offset);
             PfdHelper.readFully(pfd, locBuf);
 
             if (readLeInt(locBuf, 0) != LOCSIG)
@@ -458,7 +456,7 @@ public class AndroidZipFile implements ZipConstants {
             if (filepos == end)
                 return -1;
             synchronized (pfd) {
-                seek(pfd, filepos++);
+                PfdHelper.seek(pfd, filepos++);
                 return PfdHelper.read(pfd);
             }
         }
@@ -470,7 +468,7 @@ public class AndroidZipFile implements ZipConstants {
                     return -1;
             }
             synchronized (pfd) {
-                seek(pfd, filepos);
+                PfdHelper.seek(pfd, filepos);
                 int count = PfdHelper.read(pfd, b, off, len);
                 if (count > 0)
                     filepos += len;

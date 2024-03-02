@@ -5,6 +5,9 @@ plugins {
 }
 
 dependencies {
+    androidTestImplementation(libs.androidx.testExtJunit)
+    testImplementation(libs.junit)
+
     implementation(libs.material)
     implementation(libs.dagger)
     implementation(libs.hutool.crypto)

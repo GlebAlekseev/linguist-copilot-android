@@ -4,6 +4,9 @@ plugins {
 }
 
 dependencies {
+    androidTestImplementation(libs.androidx.testExtJunit)
+    testImplementation(libs.junit)
+
     implementation(libs.decompose)
     implementation(libs.decompose.extensionsCompose)
     implementation(libs.elmslie.core)
