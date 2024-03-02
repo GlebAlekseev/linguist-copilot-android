@@ -7,7 +7,6 @@ import com.arkivanov.decompose.router.pages.ChildPages
 import com.arkivanov.decompose.router.pages.Pages
 import com.arkivanov.decompose.router.pages.PagesNavigation
 import com.arkivanov.decompose.router.pages.childPages
-import com.arkivanov.decompose.router.pages.navigate
 import com.arkivanov.decompose.router.pages.select
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.operator.map
@@ -55,25 +54,13 @@ class DefaultContentComponent @AssistedInject constructor(
         )
 
     override val onSelectLibrary: () -> Unit = {
-        navigation.navigate {
-            it.copy(
-                selectedIndex = 0
-            )
-        }
+        navigation.select(0)
     }
     override val onSelectOverview: () -> Unit = {
-        navigation.navigate {
-            it.copy(
-                selectedIndex = 1
-            )
-        }
+        navigation.select(1)
     }
     override val onSelectProfile: () -> Unit = {
-        navigation.navigate {
-            it.copy(
-                selectedIndex = 2
-            )
-        }
+        navigation.select(2)
     }
 
 

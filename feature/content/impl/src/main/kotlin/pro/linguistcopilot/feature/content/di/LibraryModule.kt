@@ -5,7 +5,7 @@ import dagger.Module
 import pro.linguistcopilot.feature.content.library.DefaultLibraryComponent
 import pro.linguistcopilot.feature.content.library.LibraryComponent
 
-@Module
+@Module(includes = [ExternalSourcesModule::class, MySourcesModule::class])
 interface LibraryModule {
 
     @Binds
