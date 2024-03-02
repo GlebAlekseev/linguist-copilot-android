@@ -6,13 +6,13 @@ import com.arkivanov.decompose.ComponentContext
 
 @Stable
 interface BookDescriptionComponent {
-    val onCloseBookDownload: () -> Unit
+    val onCloseBookDescription: () -> Unit
     val onOpenBookReader: () -> Unit
 
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            onCloseBookDownload: () -> Unit,
+            onCloseBookDescription: () -> Unit,
             onOpenBookReader: () -> Unit
         ): BookDescriptionComponent
     }

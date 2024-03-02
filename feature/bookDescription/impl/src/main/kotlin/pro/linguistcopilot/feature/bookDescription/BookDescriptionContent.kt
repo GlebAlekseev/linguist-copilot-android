@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun BookDescriptionContent(component: BookDescriptionComponent) {
     Column {
-        Button(onClick = component.onCloseBookDownload) {
+        Button(onClick = component.onCloseBookDescription) {
             Text(text = "Назад")
         }
         Button(onClick = component.onOpenBookReader) {

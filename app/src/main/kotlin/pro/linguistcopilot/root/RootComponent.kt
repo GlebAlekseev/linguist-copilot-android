@@ -7,6 +7,7 @@ import com.arkivanov.decompose.value.Value
 import pro.linguistcopilot.feature.auth.AuthComponent
 import pro.linguistcopilot.feature.bookDescription.BookDescriptionComponent
 import pro.linguistcopilot.feature.bookDownload.BookDownloadComponent
+import pro.linguistcopilot.feature.bookReader.BookReaderComponent
 import pro.linguistcopilot.feature.content.ContentComponent
 import pro.linguistcopilot.feature.onboarding.OnboardingComponent
 
@@ -20,6 +21,7 @@ interface RootComponent {
         class Content(val contentComponent: ContentComponent) : Child()
         class BookDownload(val bookDownloadComponent: BookDownloadComponent) : Child()
         class BookDescription(val bookDescriptionComponent: BookDescriptionComponent) : Child()
+        class BookReader(val bookReaderComponent: BookReaderComponent) : Child()
     }
 
     fun interface Factory {

@@ -15,6 +15,7 @@ import kotlinx.serialization.Serializable
 import pro.linguistcopilot.feature.auth.AuthComponent
 import pro.linguistcopilot.feature.bookDescription.BookDescriptionComponent
 import pro.linguistcopilot.feature.bookDownload.BookDownloadComponent
+import pro.linguistcopilot.feature.bookReader.BookReaderComponent
 import pro.linguistcopilot.feature.content.ContentComponent
 import pro.linguistcopilot.feature.onboarding.OnboardingComponent
 
@@ -24,6 +25,7 @@ class DefaultRootComponent @AssistedInject constructor(
     private val contentFactory: ContentComponent.Factory,
     private val bookDownloadFactory: BookDownloadComponent.Factory,
     private val bookDescriptionFactory: BookDescriptionComponent.Factory,
+    private val bookReaderFactory: BookReaderComponent.Factory,
     @Assisted componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext {
     private val navigation = StackNavigation<Config>()
@@ -45,16 +47,26 @@ class DefaultRootComponent @AssistedInject constructor(
             is Config.BookDescription -> RootComponent.Child.BookDescription(
                 bookDescriptionComponent(context)
             )
+
+            is Config.BookReader -> RootComponent.Child.BookReader(bookReaderComponent(context))
         }
+
+    private fun bookReaderComponent(context: ComponentContext): BookReaderComponent =
+        bookReaderFactory(
+            componentContext = context,
+            onCloseBookReader = {
+                navigation.pop()
+            }
+        )
 
     private fun bookDescriptionComponent(context: ComponentContext): BookDescriptionComponent =
         bookDescriptionFactory(
             componentContext = context,
-            onCloseBookDownload = {
+            onCloseBookDescription = {
                 navigation.pop()
             },
             onOpenBookReader = {
-//                navigation.push()
+                navigation.push(Config.BookReader)
             }
         )
 
@@ -111,6 +123,9 @@ class DefaultRootComponent @AssistedInject constructor(
 
         @Serializable
         data object BookDescription : Config
+
+        @Serializable
+        data object BookReader : Config
     }
 
     @AssistedFactory

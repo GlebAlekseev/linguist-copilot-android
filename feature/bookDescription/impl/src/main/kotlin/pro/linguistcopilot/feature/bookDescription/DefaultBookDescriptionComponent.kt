@@ -7,7 +7,7 @@ import dagger.assisted.AssistedInject
 
 class DefaultBookDescriptionComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
-    @Assisted("onCloseBookDownload") override val onCloseBookDownload: () -> Unit,
+    @Assisted("onCloseBookDescription") override val onCloseBookDescription: () -> Unit,
     @Assisted("onOpenBookReader") override val onOpenBookReader: () -> Unit
 ) : BookDescriptionComponent, ComponentContext by componentContext {
 
@@ -15,7 +15,7 @@ class DefaultBookDescriptionComponent @AssistedInject constructor(
     interface Factory : BookDescriptionComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            @Assisted("onCloseBookDownload") onCloseBookDownload: () -> Unit,
+            @Assisted("onCloseBookDescription") onCloseBookDescription: () -> Unit,
             @Assisted("onOpenBookReader") onOpenBookReader: () -> Unit
         ): DefaultBookDescriptionComponent
     }
