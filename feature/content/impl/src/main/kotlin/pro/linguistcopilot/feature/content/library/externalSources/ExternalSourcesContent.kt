@@ -1,4 +1,4 @@
-package pro.linguistcopilot.feature.content.library.external_sources
+package pro.linguistcopilot.feature.content.library.externalSources
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

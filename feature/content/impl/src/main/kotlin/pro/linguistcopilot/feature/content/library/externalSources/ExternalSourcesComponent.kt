@@ -1,14 +1,14 @@
-package pro.linguistcopilot.feature.content.library.my_sources
+package pro.linguistcopilot.feature.content.library.externalSources
 
 import androidx.compose.runtime.Stable
 import com.arkivanov.decompose.ComponentContext
 
 @Stable
-interface MySourcesComponent {
+interface ExternalSourcesComponent {
 
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext
-        ): MySourcesComponent
+        ): ExternalSourcesComponent
     }
 }

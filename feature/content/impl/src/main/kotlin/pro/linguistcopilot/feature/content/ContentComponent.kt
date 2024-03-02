@@ -29,7 +29,8 @@ interface ContentComponent {
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
-            onNavigateToAuth: () -> Unit
+            onNavigateToAuth: () -> Unit,
+            onBookDownload: () -> Unit
         ): ContentComponent
     }
 }

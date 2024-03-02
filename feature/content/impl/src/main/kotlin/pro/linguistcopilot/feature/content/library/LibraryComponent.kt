@@ -5,8 +5,8 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.router.pages.ChildPages
 import com.arkivanov.decompose.value.Value
-import pro.linguistcopilot.feature.content.library.external_sources.ExternalSourcesComponent
-import pro.linguistcopilot.feature.content.library.my_sources.MySourcesComponent
+import pro.linguistcopilot.feature.content.library.externalSources.ExternalSourcesComponent
+import pro.linguistcopilot.feature.content.library.mySources.MySourcesComponent
 
 @Stable
 interface LibraryComponent {
@@ -25,7 +25,8 @@ interface LibraryComponent {
 
     fun interface Factory {
         operator fun invoke(
-            componentContext: ComponentContext
+            componentContext: ComponentContext,
+            onBookDownload: () -> Unit
         ): LibraryComponent
     }
 }

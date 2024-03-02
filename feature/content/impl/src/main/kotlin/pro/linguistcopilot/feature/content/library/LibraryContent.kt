@@ -21,8 +21,8 @@ import com.arkivanov.decompose.ExperimentalDecomposeApi
 import com.arkivanov.decompose.extensions.compose.jetpack.pages.Pages
 import com.arkivanov.decompose.extensions.compose.jetpack.pages.PagesScrollAnimation
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
-import pro.linguistcopilot.feature.content.library.external_sources.ExternalSourcesContent
-import pro.linguistcopilot.feature.content.library.my_sources.MySourcesContent
+import pro.linguistcopilot.feature.content.library.externalSources.ExternalSourcesContent
+import pro.linguistcopilot.feature.content.library.mySources.MySourcesContent
 
 @OptIn(ExperimentalDecomposeApi::class)
 @Composable

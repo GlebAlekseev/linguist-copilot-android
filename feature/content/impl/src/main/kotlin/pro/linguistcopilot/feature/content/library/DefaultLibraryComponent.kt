@@ -14,14 +14,15 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.serialization.Serializable
-import pro.linguistcopilot.feature.content.library.external_sources.ExternalSourcesComponent
-import pro.linguistcopilot.feature.content.library.my_sources.MySourcesComponent
+import pro.linguistcopilot.feature.content.library.externalSources.ExternalSourcesComponent
+import pro.linguistcopilot.feature.content.library.mySources.MySourcesComponent
 
 @OptIn(ExperimentalDecomposeApi::class)
 class DefaultLibraryComponent @AssistedInject constructor(
     private val mySourcesFactory: MySourcesComponent.Factory,
     private val externalSourcesFactory: ExternalSourcesComponent.Factory,
     @Assisted componentContext: ComponentContext,
+    @Assisted("onBookDownload") private val onBookDownload: () -> Unit
 ) : LibraryComponent, ComponentContext by componentContext {
     private val navigation = PagesNavigation<DefaultLibraryComponent.Config>()
 
@@ -76,7 +77,8 @@ class DefaultLibraryComponent @AssistedInject constructor(
 
     private fun mySourcesComponent(context: ComponentContext): MySourcesComponent =
         mySourcesFactory(
-            componentContext = context
+            componentContext = context,
+            onBookDownload = onBookDownload
         )
 
     private fun externalSourcesComponent(context: ComponentContext): ExternalSourcesComponent =
@@ -96,7 +98,8 @@ class DefaultLibraryComponent @AssistedInject constructor(
     @AssistedFactory
     interface Factory : LibraryComponent.Factory {
         override fun invoke(
-            componentContext: ComponentContext
+            componentContext: ComponentContext,
+            @Assisted("onBookDownload") onBookDownload: () -> Unit
         ): DefaultLibraryComponent
     }
 }

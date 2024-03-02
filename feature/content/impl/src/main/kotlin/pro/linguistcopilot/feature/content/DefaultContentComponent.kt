@@ -25,6 +25,7 @@ class DefaultContentComponent @AssistedInject constructor(
     private val profileFactory: ProfileComponent.Factory,
     @Assisted componentContext: ComponentContext,
     @Assisted("onNavigateToAuth") override val onNavigateToAuth: () -> Unit,
+    @Assisted("onBookDownload") private val onBookDownload: () -> Unit,
 ) : ContentComponent, ComponentContext by componentContext {
     private val navigation = PagesNavigation<Config>()
     override val selectedIndex: Value<Int> get() = contentPages.map { it.selectedIndex }
@@ -72,7 +73,8 @@ class DefaultContentComponent @AssistedInject constructor(
         }
 
     private fun libraryComponent(context: ComponentContext): LibraryComponent = libraryFactory(
-        componentContext = context
+        componentContext = context,
+        onBookDownload = onBookDownload
     )
 
     private fun overviewComponent(context: ComponentContext): OverviewComponent = overviewFactory(
@@ -103,7 +105,8 @@ class DefaultContentComponent @AssistedInject constructor(
     interface Factory : ContentComponent.Factory {
         override fun invoke(
             componentContext: ComponentContext,
-            @Assisted("onNavigateToAuth") onNavigateToAuth: () -> Unit
+            @Assisted("onNavigateToAuth") onNavigateToAuth: () -> Unit,
+            @Assisted("onBookDownload") onBookDownload: () -> Unit
         ): DefaultContentComponent
     }
 }

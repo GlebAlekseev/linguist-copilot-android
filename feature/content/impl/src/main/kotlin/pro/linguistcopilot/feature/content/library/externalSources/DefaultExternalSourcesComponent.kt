@@ -1,4 +1,4 @@
-package pro.linguistcopilot.feature.content.library.external_sources
+package pro.linguistcopilot.feature.content.library.externalSources
 
 import com.arkivanov.decompose.ComponentContext
 import dagger.assisted.Assisted
