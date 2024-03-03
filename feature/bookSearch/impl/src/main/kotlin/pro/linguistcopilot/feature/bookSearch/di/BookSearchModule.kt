@@ -5,7 +5,7 @@ import dagger.Module
 import pro.linguistcopilot.feature.bookSearch.BookSearchComponent
 import pro.linguistcopilot.feature.bookSearch.DefaultBookSearchComponent
 
-@Module
+@Module(includes = [SortingSheetModule::class, FiltersSheetModule::class])
 interface BookSearchModule {
 
     @Binds
