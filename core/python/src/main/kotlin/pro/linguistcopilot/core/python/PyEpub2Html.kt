@@ -2,7 +2,7 @@ package pro.linguistcopilot.core.python
 
 import com.chaquo.python.Python
 
-class Epub2Html {
+class PyEpub2Html {
     private val epub2htmlModule by lazy {
         Python.getInstance().getModule(EPUB2HTML_MODULE_NAME)
     }

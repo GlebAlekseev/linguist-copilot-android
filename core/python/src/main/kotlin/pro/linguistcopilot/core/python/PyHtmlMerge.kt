@@ -2,7 +2,7 @@ package pro.linguistcopilot.core.python
 
 import com.chaquo.python.Python
 
-class HtmlMerge {
+class PyHtmlMerge {
     private val htmlMergeModule by lazy {
         Python.getInstance().getModule(HTML_MERGE_MODULE_NAME)
     }
