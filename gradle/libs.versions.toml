@@ -49,6 +49,7 @@ androidxTestExtJunit = "1.1.5"
 hutoolCrypto = "5.8.22"
 jsoup = "1.17.1"
 splitties = "3.0.0"
+chaquo = "15.0.1"
 
 [libraries]
 desugaring = { module = "com.android.tools:desugar_jdk_libs", version = "2.0.4" }
@@ -134,6 +135,8 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradle-android-cacheFix = { id = "org.gradle.android.cache-fix", version = "2.7.3" }
+chaquo = { id = "com.chaquo.python", version.ref = "chaquo" }
+
 
 [bundles]
 compose = [
@@ -146,6 +149,7 @@ compose = [
     "compose-animation",
     "compose-foundation",
     "compose-material3",
+    "compose-activity"
 ]
 
 accompanist = [
