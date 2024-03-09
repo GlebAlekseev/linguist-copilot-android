@@ -21,32 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import pro.linguistcopilot.feature.bookDownload.elm.BookDownloadState
-import pro.linguistcopilot.feature.bookDownload.entity.BookItem
 import pro.linguistcopilot.feature.bookDownload.loadVariantSheet.LoadVariantSheetContent
 import java.text.SimpleDateFormat
 
-val sampleList = listOf(
-    BookItem("Book 1", SimpleDateFormat("dd.MM.yyyy").parse("29.12.2023")),
-    BookItem("Book 2", SimpleDateFormat("dd.MM.yyyy").parse("29.12.2023")),
-    BookItem("Book 3", SimpleDateFormat("dd.MM.yyyy").parse("29.12.2023")),
-    BookItem("Book 4", SimpleDateFormat("dd.MM.yyyy").parse("29.12.2023")),
-    BookItem("Book 5", SimpleDateFormat("dd.MM.yyyy").parse("29.12.2023")),
-    BookItem("Book 6", SimpleDateFormat("dd.MM.yyyy").parse("30.12.2023")),
-    BookItem("Book 7", SimpleDateFormat("dd.MM.yyyy").parse("30.12.2023")),
-    BookItem("Book 8", SimpleDateFormat("dd.MM.yyyy").parse("30.12.2023")),
-    BookItem("Book 9", SimpleDateFormat("dd.MM.yyyy").parse("30.12.2023")),
-    BookItem("Book 10", SimpleDateFormat("dd.MM.yyyy").parse("30.12.2023")),
-    BookItem("Book 11", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 12", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 13", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 14", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 15", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 16", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 17", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 18", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 19", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023")),
-    BookItem("Book 20", SimpleDateFormat("dd.MM.yyyy").parse("31.12.2023"))
-)
 
 @Composable
 fun BookDownloadContent(component: BookDownloadComponent) {
