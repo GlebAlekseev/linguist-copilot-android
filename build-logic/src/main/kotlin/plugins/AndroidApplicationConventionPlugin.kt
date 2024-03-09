@@ -21,6 +21,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                 apply(Plugins.LinguistCopilotDetekt)
                 apply(Plugins.GradleAndroidCacheFix)
                 apply(Plugins.LinguistCopilotKsp)
+                apply(Plugins.TakahiromDecomposer)
             }
 
             val libs = versionCatalog

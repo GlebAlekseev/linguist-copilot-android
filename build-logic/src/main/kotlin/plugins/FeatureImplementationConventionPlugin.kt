@@ -20,6 +20,7 @@ class FeatureImplementationConventionPlugin : Plugin<Project> {
                 apply(Plugins.GradleAndroidCacheFix)
                 apply(Plugins.LinguistCopilotDetekt)
                 apply(Plugins.LinguistCopilotKsp)
+                apply(Plugins.TakahiromDecomposer)
             }
 
             extensions.configure<LibraryExtension> {

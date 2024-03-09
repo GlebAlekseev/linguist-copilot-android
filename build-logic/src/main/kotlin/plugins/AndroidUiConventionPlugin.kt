@@ -11,13 +11,13 @@ import setup.configureNamespace
 @Suppress("unused")
 class AndroidUiConventionPlugin : Plugin<Project> {
 
-    @Suppress("UnstableApiUsage")
     override fun apply(target: Project) {
         with(target) {
             with(plugins) {
                 apply(Plugins.AndroidLibrary)
                 apply(Plugins.KotlinAndroid)
                 apply(Plugins.LinguistCopilotDetekt)
+                apply(Plugins.TakahiromDecomposer)
             }
 
             extensions.configure<LibraryExtension> {

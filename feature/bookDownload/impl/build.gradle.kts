@@ -1,7 +1,6 @@
 plugins {
     id("linguistcopilot.feature.impl")
     alias(libs.plugins.kotlin.serialization)
-    id("com.github.takahirom.decomposer")
 }
 
 dependencies {
