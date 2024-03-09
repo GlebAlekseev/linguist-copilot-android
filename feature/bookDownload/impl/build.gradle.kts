@@ -1,6 +1,7 @@
 plugins {
     id("linguistcopilot.feature.impl")
     alias(libs.plugins.kotlin.serialization)
+    id("com.github.takahirom.decomposer")
 }
 
 dependencies {
@@ -16,5 +17,6 @@ dependencies {
     ksp(libs.dagger.compiler)
     implementation(libs.androidx.appCompat)
     implementation(project(":core:utils"))
+    implementation(project(":core:converter"))
     implementation(project(":design:res"))
 }
