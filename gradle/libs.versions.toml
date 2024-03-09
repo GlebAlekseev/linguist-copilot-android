@@ -120,7 +120,6 @@ kotlinx-coroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-co
 kotlinx-coroutinesAndroid = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-coroutinesTest = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
-
 # Other Libraries
 timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
 splitties-appCtx = { group = "com.louiscad.splitties", name = "splitties-appctx", version.ref = "splitties" }
@@ -136,7 +135,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradle-android-cacheFix = { id = "org.gradle.android.cache-fix", version = "2.7.3" }
 chaquo = { id = "com.chaquo.python", version.ref = "chaquo" }
-
+decomposer = { id = "com.github.takahirom.decomposer", version = "main-SNAPSHOT" }
 
 [bundles]
 compose = [

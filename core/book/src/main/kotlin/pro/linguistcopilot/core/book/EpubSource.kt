@@ -17,7 +17,7 @@ import pro.linguistcopilot.core.book.util.FileUtils
 import pro.linguistcopilot.core.book.util.HtmlFormatter
 import pro.linguistcopilot.core.book.util.externalFiles
 import pro.linguistcopilot.core.book.util.saveCompressedCover
-import pro.linguistcopilot.core.utils.MD5Utils.md5Encode16
+import pro.linguistcopilot.core.crypto.MD5Utils.md5Encode16
 import splitties.init.appCtx
 import java.io.File
 import java.io.InputStream

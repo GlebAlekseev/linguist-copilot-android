@@ -8,7 +8,7 @@ dependencies {
     androidTestImplementation(libs.androidx.testExtJunit)
     testImplementation(libs.junit)
 
-    implementation(project(":core:utils"))
+    implementation(project(":core:crypto"))
     implementation(libs.jsoup)
     implementation(libs.hutool.crypto)
     implementation(libs.splitties.appCtx)

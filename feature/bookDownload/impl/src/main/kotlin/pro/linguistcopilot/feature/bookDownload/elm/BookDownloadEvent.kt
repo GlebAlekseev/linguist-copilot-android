@@ -1,7 +1,7 @@
 package pro.linguistcopilot.feature.bookDownload.elm
 
 import android.net.Uri
-import pro.linguistcopilot.feature.bookDownload.entity.BookItem
+import pro.linguistcopilot.feature.book.entity.BookItem
 
 sealed class BookDownloadEvent {
     sealed class Ui : BookDownloadEvent() {

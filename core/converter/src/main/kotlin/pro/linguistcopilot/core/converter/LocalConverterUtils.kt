@@ -1,10 +1,10 @@
 package pro.linguistcopilot.core.converter
 
 import android.content.Context
+import pro.linguistcopilot.core.di.ApplicationContext
 import pro.linguistcopilot.core.python.PyEpub2Html
 import pro.linguistcopilot.core.python.PyHtmlMerge
 import pro.linguistcopilot.core.python.PyPdf2Epub
-import pro.linguistcopilot.core.utils.di.ApplicationContext
 import java.io.File
 import java.io.FileInputStream
 import java.io.InputStream

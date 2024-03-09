@@ -17,6 +17,7 @@ android {
 //    }
     packaging {
         resources.excludes += setOf("META-INF/INDEX.LIST")
+        resources.excludes += setOf("META-INF/DEPENDENCIES")
     }
 }
 
@@ -29,7 +30,8 @@ dependencies {
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
     implementation(libs.androidx.appCompat)
-    implementation(project(":core:utils"))
+    api(project(":app:api"))
+    implementation(project(":core:di"))
     implementation(project(":design:res"))
     implementation(project(":feature:onboarding:impl"))
     implementation(project(":feature:auth:impl"))
@@ -38,4 +40,5 @@ dependencies {
     implementation(project(":feature:bookDescription:impl"))
     implementation(project(":feature:bookReader:impl"))
     implementation(project(":feature:bookSearch:impl"))
+    implementation(project(":feature:book:impl"))
 }

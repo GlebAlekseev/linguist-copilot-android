@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import pro.linguistcopilot.MainActivity
-import pro.linguistcopilot.core.utils.di.ApplicationContext
+import pro.linguistcopilot.core.di.ApplicationContext
 import pro.linguistcopilot.di.module.RootModule
 import pro.linguistcopilot.di.scope.AppComponentScope
 import pro.linguistcopilot.root.DefaultRootComponent

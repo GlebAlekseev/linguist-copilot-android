@@ -10,5 +10,5 @@ dependencies {
     implementation(libs.dagger)
 
     implementation(project(":core:python"))
-    implementation(project(":core:utils"))
+    implementation(project(":core:di"))
 }

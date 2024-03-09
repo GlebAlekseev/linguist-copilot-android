@@ -12,7 +12,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.serialization.Serializable
-import pro.linguistcopilot.core.utils.elmslie_decompose.RetainedElmStore
+import pro.linguistcopilot.core.elm.RetainedElmStore
 import pro.linguistcopilot.feature.bookDownload.elm.BookDownloadActor
 import pro.linguistcopilot.feature.bookDownload.elm.BookDownloadEvent
 import pro.linguistcopilot.feature.bookDownload.elm.BookDownloadReducer

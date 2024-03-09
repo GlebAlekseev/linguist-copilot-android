@@ -4,7 +4,7 @@ import android.net.Uri
 import android.webkit.MimeTypeMap
 import me.ag2s.epublib.util.zip.ZipException
 import pro.linguistcopilot.core.book.exception.UnsupportedFormatException
-import pro.linguistcopilot.core.utils.MD5Utils
+import pro.linguistcopilot.core.crypto.MD5Utils
 import splitties.init.appCtx
 import java.io.File
 import java.io.FileOutputStream
