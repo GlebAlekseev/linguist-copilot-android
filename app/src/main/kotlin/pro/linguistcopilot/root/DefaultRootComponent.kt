@@ -34,7 +34,7 @@ class DefaultRootComponent @AssistedInject constructor(
     override val stack: Value<ChildStack<*, RootComponent.Child>> =
         childStack(
             source = navigation,
-            initialConfiguration = Config.Onboarding,
+            initialConfiguration = Config.BookDownload,
             serializer = Config.serializer(),
             handleBackButton = true,
             childFactory = ::child,
