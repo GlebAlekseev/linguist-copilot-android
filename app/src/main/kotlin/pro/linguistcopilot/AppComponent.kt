@@ -1,10 +1,10 @@
-package pro.linguistcopilot.di
+package pro.linguistcopilot
 
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
-import pro.linguistcopilot.MainActivity
 import pro.linguistcopilot.core.di.ApplicationContext
+import pro.linguistcopilot.di.Dependencies
 import pro.linguistcopilot.di.module.RootModule
 import pro.linguistcopilot.di.scope.AppComponentScope
 import pro.linguistcopilot.root.DefaultRootComponent
@@ -14,7 +14,7 @@ import pro.linguistcopilot.root.DefaultRootComponent
 @Component(
     modules = [RootModule::class]
 )
-interface AppComponent {
+interface AppComponent : Dependencies {
     fun inject(mainActivity: MainActivity)
 
     val rootComponentFactory: DefaultRootComponent.Factory

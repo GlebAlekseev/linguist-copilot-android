@@ -17,7 +17,6 @@ android {
 //    }
     packaging {
         resources.excludes += setOf("META-INF/INDEX.LIST")
-        resources.excludes += setOf("META-INF/DEPENDENCIES")
     }
 }
 
@@ -32,6 +31,7 @@ dependencies {
     implementation(libs.androidx.appCompat)
     api(project(":app:api"))
     implementation(project(":core:di"))
+    implementation(project(":core:python"))
     implementation(project(":design:res"))
     implementation(project(":feature:onboarding:impl"))
     implementation(project(":feature:auth:impl"))
