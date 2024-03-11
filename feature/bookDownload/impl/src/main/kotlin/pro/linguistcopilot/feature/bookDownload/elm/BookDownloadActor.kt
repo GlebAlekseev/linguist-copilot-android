@@ -4,14 +4,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import pro.linguistcopilot.feature.book.usecase.GetBookListUseCase
-import pro.linguistcopilot.feature.book.usecase.LoadBookUseCase
+import pro.linguistcopilot.feature.bookDownload.usecase.StartLoadBookUseCase
 import vivid.money.elmslie.coroutines.Actor
 import javax.inject.Inject
 
 
 class BookDownloadActor @Inject constructor(
     private val getBookListUseCase: GetBookListUseCase,
-    private val loadBookUseCase: LoadBookUseCase,
+    private val startLoadBookUseCase: StartLoadBookUseCase,
 ) : Actor<BookDownloadCommand, BookDownloadEvent.Internal> {
     override fun execute(command: BookDownloadCommand): Flow<BookDownloadEvent.Internal> {
         return when (command) {
@@ -25,7 +25,7 @@ class BookDownloadActor @Inject constructor(
             }
 
             is BookDownloadCommand.LoadBook -> flow {
-                loadBookUseCase.invoke(LoadBookUseCase.Params(command.uri.toString()))
+                startLoadBookUseCase.invoke(StartLoadBookUseCase.Params(command.uri.toString()))
             }
         }
     }

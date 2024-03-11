@@ -50,8 +50,8 @@ fun BookDownloadContent(component: BookDownloadComponent) {
             }
 
             is BookDownloadState.Idle -> {
-                val groupedBookList = state.list.sortedBy { it.date }
-                    .groupBy { SimpleDateFormat("dd.MM.yyyy").format(it.date) }
+                val groupedBookList = state.list.sortedBy { it.createdAt }
+                    .groupBy { SimpleDateFormat("dd.MM.yyyy").format(it.createdAt) }
 
                 LazyColumn {
                     items(groupedBookList.toList()) { (date, bookItems) ->
