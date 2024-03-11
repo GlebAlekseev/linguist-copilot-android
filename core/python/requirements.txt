@@ -1,1 +1,5 @@
-beautifulsoup4==4.9.1
+beautifulsoup4
+PyPDF2
+ebooklib
+pdfminer
+tqdm

@@ -285,20 +285,13 @@ def process(pdf_content):
         epub.write_epub(epub_file_path, book)
 
         # Compress the generated HTML files back into a ZIP archive
-        with io.BytesIO() as output:
-            with zipfile.ZipFile(output, "w") as zf:
-                for root, _, files in os.walk(pdf_file_output):
-                    for file in files:
-                        file_path = os.path.join(root, file)
-                        zf.write(file_path,
-                                 os.path.relpath(file_path, os.path.join(temp_dir, pdf_file_output)))
-
-            zip_content = output.getvalue()
+        with open(epub_file_path, "rb") as epub_file:
+            epub_content = epub_file.read()
 
         os.remove(pdf_file_path)
         shutil.rmtree(pdf_file_output)
 
-        return zip_content
+        return epub_content
 
 #
 # # Example usage:
