@@ -26,7 +26,7 @@ class DefaultContentComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
     @Assisted("onNavigateToAuth") override val onNavigateToAuth: () -> Unit,
     @Assisted("onBookDownload") private val onBookDownload: () -> Unit,
-    @Assisted("onOpenBookDescription") private val onOpenBookDescription: () -> Unit,
+    @Assisted("onOpenBookDescription") private val onOpenBookDescription: (String) -> Unit,
     @Assisted("onOpenBookSearch") override val onOpenBookSearch: () -> Unit,
 ) : ContentComponent, ComponentContext by componentContext {
     private val navigation = PagesNavigation<Config>()
@@ -110,7 +110,7 @@ class DefaultContentComponent @AssistedInject constructor(
             componentContext: ComponentContext,
             @Assisted("onNavigateToAuth") onNavigateToAuth: () -> Unit,
             @Assisted("onBookDownload") onBookDownload: () -> Unit,
-            @Assisted("onOpenBookDescription") onOpenBookDescription: () -> Unit,
+            @Assisted("onOpenBookDescription") onOpenBookDescription: (String) -> Unit,
             @Assisted("onOpenBookSearch") onOpenBookSearch: () -> Unit,
         ): DefaultContentComponent
     }

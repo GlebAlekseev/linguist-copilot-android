@@ -27,7 +27,7 @@ interface LibraryComponent {
         operator fun invoke(
             componentContext: ComponentContext,
             onBookDownload: () -> Unit,
-            onOpenBookDescription: () -> Unit,
+            onOpenBookDescription: (String) -> Unit,
         ): LibraryComponent
     }
 }

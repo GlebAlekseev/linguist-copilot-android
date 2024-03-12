@@ -15,7 +15,9 @@ fun BookSearchContent(component: BookSearchComponent) {
         Button(onClick = component.onCloseBookSearch) {
             Text(text = "Назад")
         }
-        Button(onClick = component.onOpenBookDescription) {
+        Button(onClick = {
+            component.onOpenBookDescription.invoke("test")
+        }) {
             Text(text = "Открыть книгу")
         }
         Button(onClick = component::showFilters) {

@@ -11,7 +11,7 @@ import pro.linguistcopilot.feature.bookSearch.sortingSheet.SortingSheetComponent
 @Stable
 interface BookSearchComponent {
     val onCloseBookSearch: () -> Unit
-    val onOpenBookDescription: () -> Unit
+    val onOpenBookDescription: (String) -> Unit
 
     val filtersSheet: Value<ChildSlot<*, FiltersSheetComponent>>
     val sortingSheet: Value<ChildSlot<*, SortingSheetComponent>>
@@ -22,7 +22,7 @@ interface BookSearchComponent {
         operator fun invoke(
             componentContext: ComponentContext,
             onCloseBookSearch: () -> Unit,
-            onOpenBookDescription: () -> Unit,
+            onOpenBookDescription: (String) -> Unit,
         ): BookSearchComponent
     }
 }

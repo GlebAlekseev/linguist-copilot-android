@@ -19,7 +19,7 @@ import pro.linguistcopilot.feature.bookSearch.sortingSheet.SortingSheetComponent
 class DefaultBookSearchComponent @AssistedInject constructor(
     @Assisted componentContext: ComponentContext,
     @Assisted("onCloseBookReader") override val onCloseBookSearch: () -> Unit,
-    @Assisted("onOpenBookDescription") override val onOpenBookDescription: () -> Unit,
+    @Assisted("onOpenBookDescription") override val onOpenBookDescription: (String) -> Unit,
 ) : BookSearchComponent, ComponentContext by componentContext {
     private val filtersSheetNavigation = SlotNavigation<FiltersSheetConfig>()
     private val sortingSheetNavigation = SlotNavigation<SortingSheetConfig>()
@@ -69,7 +69,7 @@ class DefaultBookSearchComponent @AssistedInject constructor(
         override fun invoke(
             componentContext: ComponentContext,
             @Assisted("onCloseBookReader") onCloseBookSearch: () -> Unit,
-            @Assisted("onOpenBookDescription") onOpenBookDescription: () -> Unit,
+            @Assisted("onOpenBookDescription") onOpenBookDescription: (String) -> Unit,
         ): DefaultBookSearchComponent
     }
 }

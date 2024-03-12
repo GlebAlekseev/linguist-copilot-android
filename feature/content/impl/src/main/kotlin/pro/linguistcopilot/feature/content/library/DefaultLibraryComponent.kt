@@ -23,7 +23,7 @@ class DefaultLibraryComponent @AssistedInject constructor(
     private val externalSourcesFactory: ExternalSourcesComponent.Factory,
     @Assisted componentContext: ComponentContext,
     @Assisted("onBookDownload") private val onBookDownload: () -> Unit,
-    @Assisted("onOpenBookDescription") private val onOpenBookDescription: () -> Unit
+    @Assisted("onOpenBookDescription") private val onOpenBookDescription: (String) -> Unit
 ) : LibraryComponent, ComponentContext by componentContext {
     private val navigation = PagesNavigation<DefaultLibraryComponent.Config>()
 
@@ -102,7 +102,7 @@ class DefaultLibraryComponent @AssistedInject constructor(
         override fun invoke(
             componentContext: ComponentContext,
             @Assisted("onBookDownload") onBookDownload: () -> Unit,
-            @Assisted("onOpenBookDescription") onOpenBookDescription: () -> Unit
+            @Assisted("onOpenBookDescription") onOpenBookDescription: (String) -> Unit
         ): DefaultLibraryComponent
     }
 }

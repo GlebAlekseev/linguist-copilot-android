@@ -15,6 +15,7 @@ dependencies {
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
     implementation(libs.androidx.appCompat)
+    implementation(project(":feature:book:api"))
     implementation(project(":core:elm"))
     implementation(project(":core:di"))
     implementation(project(":design:res"))

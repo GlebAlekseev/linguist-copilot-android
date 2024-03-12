@@ -14,4 +14,7 @@ interface BookItemDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrReplace(bookItemDbModel: BookItemDbModel)
+
+    @Query("SELECT * FROM BookItemDbModel WHERE id = :id")
+    fun getById(id: String): BookItemDbModel?
 }

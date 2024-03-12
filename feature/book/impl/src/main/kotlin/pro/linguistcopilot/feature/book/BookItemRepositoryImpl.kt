@@ -11,31 +11,7 @@ import pro.linguistcopilot.feature.book.repository.BookItemRepository
 import pro.linguistcopilot.feature.book.room.BookItemDao
 import pro.linguistcopilot.feature.book.room.mapper.mapToDb
 import pro.linguistcopilot.feature.book.room.mapper.mapToDomain
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.UUID
 import javax.inject.Inject
-import kotlin.random.Random
-
-val sampleList: List<BookItem> by lazy {
-    val dateFormatter = SimpleDateFormat("yyyy-MM-dd")
-    val startDate = dateFormatter.parse("2023-11-23")!!
-    val endDate = dateFormatter.parse("2023-11-27")!!
-
-    (1..10).map {
-        val title = "Book $it"
-        val uri = UUID.randomUUID().toString()
-        val createdAt = generateRandomDate(startDate, endDate)
-        val hash = UUID.randomUUID().toString()
-
-        BookItem(title = title, uri = uri, createdAt = createdAt, hash = hash)
-    }
-}
-
-private fun generateRandomDate(startDate: Date, endDate: Date): Date {
-    val random = Random.nextLong(startDate.time, endDate.time)
-    return Date(random)
-}
 
 
 @AppComponentScope
@@ -43,7 +19,7 @@ class BookItemRepositoryImpl @Inject constructor(
     private val bookItemDao: BookItemDao
 ) : BookItemRepository {
     private val temporaryBookList =
-        MutableStateFlow(sampleList)
+        MutableStateFlow(listOf<BookItem>())
     private val bookList = bookItemDao.getAllAsFlow().map { it.map { it.mapToDomain() } }
     override val bookItems: Flow<List<BookItem>>
         get() = combine(bookList, temporaryBookList) { dbList, tempList ->
@@ -84,5 +60,9 @@ class BookItemRepositoryImpl @Inject constructor(
         }
         temporaryBookList.tryEmit(newList)
         bookItemDao.insertOrReplace(bookItem.mapToDb())
+    }
+
+    override fun getBookItemById(id: String): BookItem? {
+        return bookItemDao.getById(id)?.mapToDomain()
     }
 }

@@ -11,6 +11,7 @@ interface BookReaderComponent {
     fun interface Factory {
         operator fun invoke(
             componentContext: ComponentContext,
+            bookId: String,
             onCloseBookReader: () -> Unit,
         ): BookReaderComponent
     }

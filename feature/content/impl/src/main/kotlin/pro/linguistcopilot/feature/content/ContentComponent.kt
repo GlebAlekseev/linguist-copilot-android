@@ -32,7 +32,7 @@ interface ContentComponent {
             componentContext: ComponentContext,
             onNavigateToAuth: () -> Unit,
             onBookDownload: () -> Unit,
-            onOpenBookDescription: () -> Unit,
+            onOpenBookDescription: (String) -> Unit,
             onOpenBookSearch: () -> Unit,
         ): ContentComponent
     }

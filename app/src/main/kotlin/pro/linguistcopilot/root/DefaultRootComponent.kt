@@ -34,7 +34,7 @@ class DefaultRootComponent @AssistedInject constructor(
     override val stack: Value<ChildStack<*, RootComponent.Child>> =
         childStack(
             source = navigation,
-            initialConfiguration = Config.BookDownload,
+            initialConfiguration = Config.Content,
             serializer = Config.serializer(),
             handleBackButton = true,
             childFactory = ::child,
@@ -47,10 +47,10 @@ class DefaultRootComponent @AssistedInject constructor(
             is Config.Content -> RootComponent.Child.Content(contentComponent(context))
             is Config.BookDownload -> RootComponent.Child.BookDownload(bookDownloadComponent(context))
             is Config.BookDescription -> RootComponent.Child.BookDescription(
-                bookDescriptionComponent(context)
+                bookDescriptionComponent(context, config.bookId)
             )
 
-            is Config.BookReader -> RootComponent.Child.BookReader(bookReaderComponent(context))
+            is Config.BookReader -> RootComponent.Child.BookReader(bookReaderComponent(context, config.bookId))
             is Config.BookSearch -> RootComponent.Child.BookSearch(bookSearchComponent(context))
         }
 
@@ -60,27 +60,32 @@ class DefaultRootComponent @AssistedInject constructor(
             onCloseBookSearch = {
                 navigation.pop()
             },
-            onOpenBookDescription = {
-                navigation.push(Config.BookDescription)
+            onOpenBookDescription = { bookId ->
+                navigation.push(Config.BookDescription(bookId))
             }
         )
 
-    private fun bookReaderComponent(context: ComponentContext): BookReaderComponent =
+    private fun bookReaderComponent(context: ComponentContext, bookId: String): BookReaderComponent =
         bookReaderFactory(
             componentContext = context,
+            bookId = bookId,
             onCloseBookReader = {
                 navigation.pop()
             }
         )
 
-    private fun bookDescriptionComponent(context: ComponentContext): BookDescriptionComponent =
+    private fun bookDescriptionComponent(
+        context: ComponentContext,
+        bookId: String
+    ): BookDescriptionComponent =
         bookDescriptionFactory(
             componentContext = context,
+            bookId = bookId,
             onCloseBookDescription = {
                 navigation.pop()
             },
-            onOpenBookReader = {
-                navigation.push(Config.BookReader)
+            onOpenBookReader = { bookId ->
+                navigation.push(Config.BookReader(bookId = bookId))
             }
         )
 
@@ -100,8 +105,8 @@ class DefaultRootComponent @AssistedInject constructor(
         onBookDownload = {
             navigation.push(Config.BookDownload)
         },
-        onOpenBookDescription = {
-            navigation.push(Config.BookDescription)
+        onOpenBookDescription = { bookId ->
+            navigation.push(Config.BookDescription(bookId))
         },
         onOpenBookSearch = {
             navigation.push(Config.BookSearch)
@@ -139,10 +144,10 @@ class DefaultRootComponent @AssistedInject constructor(
         data object BookDownload : Config
 
         @Serializable
-        data object BookDescription : Config
+        data class BookDescription(val bookId: String) : Config
 
         @Serializable
-        data object BookReader : Config
+        data class BookReader(val bookId: String) : Config
 
         @Serializable
         data object BookSearch : Config

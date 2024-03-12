@@ -11,4 +11,5 @@ interface BookItemRepository {
     fun updateTemporaryBookItem(bookItem: BookItem)
     suspend fun isExist(hash: String): Boolean
     fun removeTemporaryBookItemAndAddBookItem(bookItem: BookItem)
+    fun getBookItemById(id: String): BookItem?
 }
