@@ -4,9 +4,14 @@ plugins {
 }
 
 dependencies {
+    implementation(libs.kotlinx.serialization.json)
+
     androidTestImplementation(libs.androidx.testExtJunit)
     testImplementation(libs.junit)
 
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
     implementation(libs.decompose)
     implementation(libs.decompose.extensionsCompose)
     implementation(libs.elmslie.core)

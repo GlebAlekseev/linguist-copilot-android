@@ -4,9 +4,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import pro.linguistcopilot.di.scope.AppComponentScope
 import pro.linguistcopilot.feature.book.entity.BookItem
 import pro.linguistcopilot.feature.book.repository.BookItemRepository
+import pro.linguistcopilot.feature.book.room.BookItemDao
+import pro.linguistcopilot.feature.book.room.mapper.mapToDb
+import pro.linguistcopilot.feature.book.room.mapper.mapToDomain
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.UUID
@@ -35,17 +39,19 @@ private fun generateRandomDate(startDate: Date, endDate: Date): Date {
 
 
 @AppComponentScope
-class BookItemRepositoryImpl @Inject constructor() : BookItemRepository {
+class BookItemRepositoryImpl @Inject constructor(
+    private val bookItemDao: BookItemDao
+) : BookItemRepository {
     private val temporaryBookList =
         MutableStateFlow(sampleList)
-    private val bookList = MutableStateFlow(listOf<BookItem>())
+    private val bookList = bookItemDao.getAllAsFlow().map { it.map { it.mapToDomain() } }
     override val bookItems: Flow<List<BookItem>>
         get() = combine(bookList, temporaryBookList) { dbList, tempList ->
             (dbList + tempList).sortedByDescending { it.createdAt }
         }
 
     override fun addBookItem(bookItem: BookItem) {
-        bookList.value += bookItem
+        bookItemDao.insertOrReplace(bookItem.mapToDb())
     }
 
     override fun addTemporaryBookItem(bookItem: BookItem): BookItem {
@@ -77,6 +83,6 @@ class BookItemRepositoryImpl @Inject constructor() : BookItemRepository {
             removeIf { it.id == bookItem.id }
         }
         temporaryBookList.tryEmit(newList)
-        bookList.value += bookItem
+        bookItemDao.insertOrReplace(bookItem.mapToDb())
     }
 }
