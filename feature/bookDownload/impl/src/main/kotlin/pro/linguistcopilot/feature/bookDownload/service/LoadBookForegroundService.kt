@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
@@ -78,7 +79,16 @@ class LoadBookForegroundService : Service() {
         uri: String,
         notificationCompatBuilder: NotificationCompat.Builder
     ) {
-        loadBookUseCase.invoke(LoadBookUseCase.Params(uri)) { result ->
+        loadBookUseCase.invoke(
+            LoadBookUseCase.Params(
+                uri = uri,
+                filename = Uri.parse(uri).path!!.let { Uri.decode(it) }
+                    .split("/")
+                    .last()
+                    .dropLastWhile { it != '.' }
+                    .drop(1)
+            )
+        ) { result ->
             result.collect { state ->
                 state.toastMessage?.let {
                     Toast.makeText(applicationContext, it, Toast.LENGTH_SHORT).show()

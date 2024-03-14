@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     implementation(libs.dagger)
-    implementation(libs.kotlinx.coroutinesCore)
+    implementation(libs.kotlinx.coroutinesCoreJvm)
     api(project(":core:utils"))
     implementation(project(":feature:book:api"))
 }

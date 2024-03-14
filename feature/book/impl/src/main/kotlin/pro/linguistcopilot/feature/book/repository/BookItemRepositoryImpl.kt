@@ -1,4 +1,4 @@
-package pro.linguistcopilot.feature.book
+package pro.linguistcopilot.feature.book.repository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import pro.linguistcopilot.di.scope.AppComponentScope
+import pro.linguistcopilot.feature.book.controller.LocalBookFileController
 import pro.linguistcopilot.feature.book.entity.BookItem
-import pro.linguistcopilot.feature.book.repository.BookItemRepository
 import pro.linguistcopilot.feature.book.room.BookItemDao
 import pro.linguistcopilot.feature.book.room.mapper.mapToDb
 import pro.linguistcopilot.feature.book.room.mapper.mapToDomain
@@ -16,7 +16,8 @@ import javax.inject.Inject
 
 @AppComponentScope
 class BookItemRepositoryImpl @Inject constructor(
-    private val bookItemDao: BookItemDao
+    private val bookItemDao: BookItemDao,
+    private val localBookFileController: LocalBookFileController
 ) : BookItemRepository {
     private val temporaryBookList =
         MutableStateFlow(listOf<BookItem>())
@@ -27,7 +28,8 @@ class BookItemRepositoryImpl @Inject constructor(
         }
 
     override fun addBookItem(bookItem: BookItem) {
-        bookItemDao.insertOrReplace(bookItem.mapToDb())
+        val newUri = localBookFileController.copyToLocal(bookItem.uri)
+        bookItemDao.insertOrReplace(bookItem.copy(uri = newUri).mapToDb())
     }
 
     override fun addTemporaryBookItem(bookItem: BookItem): BookItem {
@@ -59,7 +61,7 @@ class BookItemRepositoryImpl @Inject constructor(
             removeIf { it.id == bookItem.id }
         }
         temporaryBookList.tryEmit(newList)
-        bookItemDao.insertOrReplace(bookItem.mapToDb())
+        addBookItem(bookItem)
     }
 
     override fun getBookItemById(id: String): BookItem? {

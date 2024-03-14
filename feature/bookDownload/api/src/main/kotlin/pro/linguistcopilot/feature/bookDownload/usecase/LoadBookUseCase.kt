@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class LoadBookUseCase @Inject constructor(
     private val bookItemRepository: BookItemRepository,
-    private val localBookProcessingController: LocalBookProcessingController
+    private val localBookProcessingController: LocalBookProcessingController,
 ) : UseCase2<LoadBookUseCase.Params, Flow<ProgressResult>>() {
     override fun execute(params: Params): Flow<ProgressResult> {
         return flow {
@@ -31,8 +31,9 @@ class LoadBookUseCase @Inject constructor(
                 return@flow
             }
             val hash = localBookProcessingController.getHash(params.uri)
+
             val newTemporaryBookItem = BookItem(
-                title = params.uri.split("/").lastOrNull()?.takeLast(6) ?: "Unknown name",
+                title = params.filename,
                 uri = params.uri,
                 hash = hash
             )
@@ -83,24 +84,28 @@ class LoadBookUseCase @Inject constructor(
                 emit(ProgressResult(progress = 100))
                 return@flow
             }
-            bookItemRepository.updateTemporaryBookItem(temporaryBookItem.copy(isValid = true))
+            temporaryBookItem = temporaryBookItem.copy(isValid = true)
+            bookItemRepository.updateTemporaryBookItem(temporaryBookItem)
             emit(ProgressResult(progress = (26..30).random()))
             val epubUri = localBookProcessingController.convert2epub(params.uri)
             emit(ProgressResult(progress = (31..55).random()))
             if (epubUri != null) {
-                bookItemRepository.updateTemporaryBookItem(temporaryBookItem.copy(epubUri = epubUri))
+                temporaryBookItem = temporaryBookItem.copy(epubUri = epubUri)
+                bookItemRepository.updateTemporaryBookItem(temporaryBookItem)
             }
             emit(ProgressResult(progress = (56..60).random()))
             val pdfUri = localBookProcessingController.convert2pdf(params.uri)
             emit(ProgressResult(progress = (61..85).random()))
             if (pdfUri != null) {
-                bookItemRepository.updateTemporaryBookItem(temporaryBookItem.copy(pdfUri = pdfUri))
+                temporaryBookItem = temporaryBookItem.copy(pdfUri = pdfUri)
+                bookItemRepository.updateTemporaryBookItem(temporaryBookItem)
             }
             emit(ProgressResult(progress = (86..90).random()))
             if (pdfUri != null || epubUri != null) {
                 val metaInfo = localBookProcessingController.getMetaInfo(epubUri, pdfUri)
                 emit(ProgressResult(progress = 95))
-                bookItemRepository.updateTemporaryBookItem(temporaryBookItem.copy(metaInfo = metaInfo))
+                temporaryBookItem = temporaryBookItem.copy(metaInfo = metaInfo)
+                bookItemRepository.updateTemporaryBookItem(temporaryBookItem)
             } else {
                 temporaryBookItem = temporaryBookItem.copy(
                     isBad = true,
@@ -114,6 +119,5 @@ class LoadBookUseCase @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
-    @JvmInline
-    value class Params(val uri: String) : UseCase2.Params
+    data class Params(val uri: String, val filename: String) : UseCase2.Params
 }

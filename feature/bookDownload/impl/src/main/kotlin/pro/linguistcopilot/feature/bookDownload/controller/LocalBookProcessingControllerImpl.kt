@@ -4,6 +4,7 @@ import android.content.Context
 import pro.linguistcopilot.core.converter.LocalConverterUtils
 import pro.linguistcopilot.core.di.ApplicationContext
 import pro.linguistcopilot.core.file.openInputStreamByPath
+import pro.linguistcopilot.feature.book.controller.LocalBookFileController
 import pro.linguistcopilot.feature.book.entity.MetaInfo
 import java.io.File
 import java.io.FileInputStream
@@ -14,6 +15,7 @@ import javax.inject.Inject
 
 class LocalBookProcessingControllerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
+    private val localBookFileController: LocalBookFileController
 ) : LocalBookProcessingController {
     override fun getHash(uri: String): String {
         val inputStream = context.openInputStreamByPath(uri)
@@ -58,24 +60,30 @@ class LocalBookProcessingControllerImpl @Inject constructor(
         var fileInputStream: FileInputStream? = null
         var fileOutputStream: FileOutputStream? = null
         try {
-            return if (uri.endsWith(".epub")) uri else {
+            return if (uri.endsWith(".epub")) localBookFileController.copyToLocal(uri) else {
                 val fileName = UUID.randomUUID().toString() + ".epub"
+                val directoryPath = LocalBookFileController.LOCAL_FILE_STORAGE_PATH
+                val filePath =
+                    context.filesDir.absolutePath + File.separator + directoryPath + File.separator + fileName
+                val directory = File(directoryPath)
+                directory.mkdirs()
                 fileInputStream = context.openInputStreamByPath(uri)
-                fileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
+                fileOutputStream = FileOutputStream(filePath)
                 LocalConverterUtils.convertPdfToEpub(
                     inputStream = fileInputStream,
                     outputStream = fileOutputStream
                 )
-                fileOutputStream?.close()
+                fileOutputStream.close()
                 fileInputStream.close()
-                val outputPath = context.filesDir.absolutePath + File.separator + fileName
-                outputPath
+                filePath
             }
         } catch (e: Exception) {
             e.printStackTrace()
             fileOutputStream?.close()
             fileInputStream?.close()
             return null
+        } finally {
+            fileInputStream?.close()
         }
     }
 
@@ -83,23 +91,29 @@ class LocalBookProcessingControllerImpl @Inject constructor(
         var fileInputStream: FileInputStream? = null
         var fileOutputStream: FileOutputStream? = null
         try {
-            return if (uri.endsWith(".pdf")) uri else {
+            return if (uri.endsWith(".pdf")) localBookFileController.copyToLocal(uri) else {
                 val fileName = UUID.randomUUID().toString() + ".pdf"
+                val directoryPath = LocalBookFileController.LOCAL_FILE_STORAGE_PATH
+                val filePath =
+                    context.filesDir.absolutePath + File.separator + directoryPath + File.separator + fileName
+                val directory = File(directoryPath)
+                directory.mkdirs()
                 fileInputStream = context.openInputStreamByPath(uri)
-                fileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
+                fileOutputStream = FileOutputStream(filePath)
                 LocalConverterUtils.convertEpubToPdf(
                     context = context,
                     inputStream = fileInputStream,
                     outputStream = fileOutputStream
                 )
-                val outputPath = context.filesDir.absolutePath + File.separator + fileName
-                outputPath
+                filePath
             }
         } catch (e: Exception) {
             e.printStackTrace()
             fileOutputStream?.close()
             fileInputStream?.close()
             return null
+        } finally {
+            fileInputStream?.close()
         }
     }
 
@@ -107,9 +121,5 @@ class LocalBookProcessingControllerImpl @Inject constructor(
         return MetaInfo(
             description = "Описание"
         )
-    }
-
-    companion object {
-        private const val BOOKS_INTERNAL_STORAGE = "books"
     }
 }

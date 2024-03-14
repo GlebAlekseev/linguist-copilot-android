@@ -1,5 +1,8 @@
 package pro.linguistcopilot.feature.bookDescription
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
@@ -9,16 +12,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.FileProvider
 import pro.linguistcopilot.feature.bookDescription.elm.BookDescriptionState
+import java.io.File
 
-//private fun Context.openDocumentInExternalApp(uri: Uri) {
-//    val intent = Intent(Intent.ACTION_VIEW).apply {
-//        setDataAndType(uri, "application/pdf")
-//        flags =  Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
-//        action = Intent.ACTION_CREATE_DOCUMENT
-//    }
-//    startActivity(intent)
-//}
+private fun Context.openDocumentInExternalApp(uri: Uri, mimeType: String) {
+    val uri = FileProvider.getUriForFile(this,"${packageName}.fileprovider", File(uri.path!!))
+    val intent = Intent(Intent.ACTION_VIEW).apply {
+        setDataAndType(uri, mimeType)
+        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION
+    }
+    startActivity(intent)
+}
 
 @Composable
 fun BookDescriptionContent(component: BookDescriptionComponent) {
@@ -41,18 +46,28 @@ fun BookDescriptionContent(component: BookDescriptionComponent) {
                 Text(text = "Pdf Uri: ${state.bookItem.pdfUri}")
 
                 Button(onClick = {
-//                    context.openDocumentInExternalApp(Uri.parse(state.bookItem.uri))
+                    val isEpub = state.bookItem.uri.endsWith(".epub")
+                    context.openDocumentInExternalApp(
+                        Uri.parse(state.bookItem.uri),
+                        if (isEpub) "application/epub+zip" else "application/pdf"
+                    )
                 }) {
                     Text(text = "Открыть origin в другой читалке")
                 }
                 Button(onClick = {
-//                    context.openDocumentInExternalApp(Uri.parse(state.bookItem.epubUri))
+                    context.openDocumentInExternalApp(
+                        Uri.parse(state.bookItem.epubUri),
+                        "application/epub+zip"
+                    )
 
                 }) {
                     Text(text = "Открыть epub в другой читалке")
                 }
                 Button(onClick = {
-//                    context.openDocumentInExternalApp(Uri.parse(state.bookItem.pdfUri))
+                    context.openDocumentInExternalApp(
+                        Uri.parse(state.bookItem.pdfUri),
+                        "application/pdf"
+                    )
                 }) {
                     Text(text = "Открыть pdf в другой читалке")
                 }

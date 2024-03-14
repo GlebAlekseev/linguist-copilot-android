@@ -6,4 +6,5 @@ plugins {
 dependencies {
     testImplementation(libs.junit)
     implementation(libs.kotlinx.coroutinesCore)
+    implementation(libs.apache.commons.codec)
 }
