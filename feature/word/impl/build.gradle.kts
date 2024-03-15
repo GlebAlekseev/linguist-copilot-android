@@ -16,4 +16,6 @@ dependencies {
 
     implementation(project(":core:di"))
     implementation(project(":feature:word:api"))
+    implementation("net.sf.extjwnl:extjwnl:2.0.5")
+    implementation("net.sf.extjwnl:extjwnl-data-wn31:1.2")
 }
