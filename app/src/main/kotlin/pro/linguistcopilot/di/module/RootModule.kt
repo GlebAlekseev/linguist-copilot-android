@@ -10,6 +10,7 @@ import pro.linguistcopilot.feature.bookReader.di.BookReaderModule
 import pro.linguistcopilot.feature.bookSearch.di.BookSearchModule
 import pro.linguistcopilot.feature.content.di.ContentModule
 import pro.linguistcopilot.feature.onboarding.di.OnboardingModule
+import pro.linguistcopilot.feature.textProcessing.di.TextProcessingModule
 import pro.linguistcopilot.root.DefaultRootComponent
 import pro.linguistcopilot.root.RootComponent
 
@@ -23,6 +24,7 @@ import pro.linguistcopilot.root.RootComponent
         BookReaderModule::class,
         BookSearchModule::class,
         BookModule::class,
+        TextProcessingModule::class
     ]
 )
 interface RootModule {

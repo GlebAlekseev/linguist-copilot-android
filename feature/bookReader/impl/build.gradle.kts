@@ -18,4 +18,5 @@ dependencies {
     implementation(project(":core:elm"))
     implementation(project(":core:di"))
     implementation(project(":design:res"))
+    implementation(project(":feature:textProcessing:api"))
 }
