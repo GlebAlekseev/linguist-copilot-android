@@ -21,6 +21,9 @@ android {
 }
 
 dependencies {
+    androidTestImplementation(libs.androidx.testExtJunit)
+    testImplementation(libs.junit)
+
     implementation(libs.androidx.coreKtx)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
