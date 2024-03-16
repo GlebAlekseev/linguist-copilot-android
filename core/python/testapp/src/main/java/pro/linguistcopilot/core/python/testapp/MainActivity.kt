@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
+import pro.linguistcopilot.core.python.PyNltkCategorizeText
 import pro.linguistcopilot.core.python.PyNltkIsPassiveVoice
 import pro.linguistcopilot.core.python.PyNltkKeywordExtraction
 import pro.linguistcopilot.core.python.PyNltkMostRareWords
@@ -17,22 +18,14 @@ class MainActivity : ComponentActivity() {
 //            "A surface container using the 'background' color from the theme"
 //        )
 //        println(result)
-        val senteces = """
-                The cake was baked by Mary.
-                The letter has been sent by John.
-                The problem will be solved by the team.
-                The house was painted by the workers yesterday.
-                The book has been read by many students.
-                The door will be opened by the manager.
-                The cake was delicious.
-                Mary baked the cake.
-        """.trimIndent().split("\n")
-        for (sentece in senteces){
-            val result = PyNltkIsPassiveVoice().isPassiveVoice(sentece)
-            println("$sentece --> $result")
-        }
-
-
+        val text = "The new programming language is revolutionizing the technology industry."
+        val map = mapOf(
+            "technology" to listOf("computer", "internet", "software", "programming"),
+            "sports" to listOf("football", "soccer", "basketball",  "tennis"),
+            "politics" to listOf("government","president","election","policy")
+        )
+        val result = PyNltkCategorizeText().categorize(text, map)
+        println(result)
 
         setContent {
             Text("Android")

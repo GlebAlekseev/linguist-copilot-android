@@ -2,6 +2,7 @@
 plugins {
     id("linguistcopilot.android.library")
     id("com.chaquo.python")
+    alias(libs.plugins.kotlin.serialization)
 
 }
 android {
@@ -24,5 +25,6 @@ chaquopy{
 dependencies {
     androidTestImplementation(libs.androidx.testExtJunit)
     testImplementation(libs.junit)
+    implementation(libs.kotlinx.serialization.json)
 
 }
