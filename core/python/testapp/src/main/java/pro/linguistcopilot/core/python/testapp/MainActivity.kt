@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
-import pro.linguistcopilot.core.python.PyNltkPOSForText
-import pro.linguistcopilot.core.python.PyNltkSummarize
+import pro.linguistcopilot.core.python.PyNltkMostRareWords
 import pro.linguistcopilot.core.python.startPython
 
 class MainActivity : ComponentActivity() {
@@ -16,7 +15,8 @@ class MainActivity : ComponentActivity() {
 //            "A surface container using the 'background' color from the theme"
 //        )
 //        println(result)
-        val result1 = PyNltkSummarize().summarize("""
+        val result1 = PyNltkMostRareWords().mostRare(
+            """
             
             Iron is a chemical element; it has symbol Fe (from Latin ferrum 'iron') and atomic number 26. It is a metal that belongs to the first transition series and group 8 of the periodic table. It is, by mass, the most common element on Earth, forming much of Earth's outer and inner core. It is the fourth most common element in the Earth's crust, being mainly deposited by meteorites in its metallic state.
 
@@ -26,7 +26,8 @@ class MainActivity : ComponentActivity() {
 
             The body of an adult human contains about 4 grams (0.005% body weight) of iron, mostly in hemoglobin and myoglobin. These two proteins play essential roles in oxygen transport by blood and oxygen storage in muscles. To maintain the necessary levels, human iron metabolism requires a minimum of iron in the diet. Iron is also the metal at the active site of many important redox enzymes dealing with cellular respiration and oxidation and reduction in plants and animals.[9]
             
-        """.trimIndent(), 3)
+        """.trimIndent(), 10
+        )
         println(result1)
 
 

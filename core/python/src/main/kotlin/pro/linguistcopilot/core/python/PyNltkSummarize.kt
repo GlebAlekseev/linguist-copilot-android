@@ -2,6 +2,8 @@ package pro.linguistcopilot.core.python
 
 import com.chaquo.python.Python
 
+// only en
+
 class PyNltkSummarize {
     private val nltkSummarizeModule by lazy {
         Python.getInstance().getModule(NLTK_SUMMARIZE_MODULE_NAME)

@@ -2,6 +2,8 @@ package pro.linguistcopilot.core.python
 
 import com.chaquo.python.Python
 
+// only en
+
 class PyNltkPOSForText {
     private val nltkPOSForTextModule by lazy {
         Python.getInstance().getModule(NLTK_POS_FOR_TEXT_MODULE_NAME)
