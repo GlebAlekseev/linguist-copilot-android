@@ -4,3 +4,4 @@ ebooklib
 pdfminer
 tqdm
 nltk
+scikit-learn

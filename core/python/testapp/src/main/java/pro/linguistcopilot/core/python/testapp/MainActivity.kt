@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
+import pro.linguistcopilot.core.python.PyNltkKeywordExtraction
 import pro.linguistcopilot.core.python.PyNltkMostRareWords
 import pro.linguistcopilot.core.python.startPython
 
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
 //            "A surface container using the 'background' color from the theme"
 //        )
 //        println(result)
-        val result1 = PyNltkMostRareWords().mostRare(
+        val result1 = PyNltkKeywordExtraction().extractKeywords(
             """
             
             Iron is a chemical element; it has symbol Fe (from Latin ferrum 'iron') and atomic number 26. It is a metal that belongs to the first transition series and group 8 of the periodic table. It is, by mass, the most common element on Earth, forming much of Earth's outer and inner core. It is the fourth most common element in the Earth's crust, being mainly deposited by meteorites in its metallic state.
