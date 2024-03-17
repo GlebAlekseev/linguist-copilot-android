@@ -6,3 +6,4 @@ tqdm
 nltk
 scikit-learn
 spacy
+spacy-ke
