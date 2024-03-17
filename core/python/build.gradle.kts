@@ -17,7 +17,9 @@ chaquopy{
         buildPython("python3.8")
         version = "3.8"
         pip{
+            install("pydantic<2")
             install("-r", "requirements.txt")
+            install("https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.0/en_core_web_sm-2.2.0.tar.gz")
         }
     }
 }
