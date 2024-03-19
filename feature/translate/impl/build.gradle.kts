@@ -15,7 +15,7 @@ dependencies {
     implementation(libs.androidx.appCompat)
 
     implementation(project(":core:di"))
-    api(project(":feature:word:api"))
-    implementation("net.sf.extjwnl:extjwnl:2.0.5")
-    implementation("net.sf.extjwnl:extjwnl-data-wn31:1.2")
+    api(project(":feature:translate:api"))
+
+    implementation("com.google.mlkit:translate:17.0.2")
 }
