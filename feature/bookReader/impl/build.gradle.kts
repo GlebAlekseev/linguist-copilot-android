@@ -19,5 +19,6 @@ dependencies {
     implementation(project(":core:di"))
     implementation(project(":design:res"))
     implementation(project(":feature:textProcessing:api"))
+    implementation(project(":feature:word:api"))
     implementation(project(":feature:translate:api"))
 }

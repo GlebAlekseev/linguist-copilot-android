@@ -8,4 +8,5 @@ dependencies {
     implementation(libs.dagger)
     implementation(libs.kotlinx.coroutinesCore)
     api(project(":core:utils"))
+    implementation(project(":feature:word:api"))
 }

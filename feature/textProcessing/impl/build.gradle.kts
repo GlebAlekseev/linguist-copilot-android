@@ -13,6 +13,7 @@ dependencies {
     implementation(project(":core:di"))
 
     api(project(":feature:textProcessing:api"))
+    implementation(project(":feature:word:api"))
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }

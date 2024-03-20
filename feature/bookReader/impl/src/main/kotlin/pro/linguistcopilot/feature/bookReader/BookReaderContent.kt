@@ -8,24 +8,30 @@ import androidx.compose.runtime.LaunchedEffect
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import pro.linguistcopilot.feature.translate.entity.Language
+import pro.linguistcopilot.feature.translate.usecase.TranslateTextUseCase
+import pro.linguistcopilot.feature.word.entity.Language
 
 @Composable
 fun BookReaderContent(component: BookReaderComponent) {
     val controller = component.textProcessingController
     val lang = controller.getTextLanguage("The quick brown fox jumps over the lazy dog.")
     val taggedText = controller.getTaggedText("The quick brown fox jumps over the lazy dog.")
-    val ctrl = component.textTranslationController
+    val translateTextUseCase = component.translateTextUseCase
     val text = """
         В лесу за деревней таилось старое загадочное место, о котором ходили мрачные легенды. Густые лианы переплетались среди деревьев, создавая впечатление, что они живые и стремятся удержать любого, кто осмелился приблизиться. Ветер шептал таинственные слова, а в темноте слышались шорохи, заставляющие сердце биться быстрее. Местные жители рассказывали истории о потерянных путниках, которые исчезали без вести в этих зловещих чащах, никогда не вернувшись к своим домам. Но несмотря на все предостережения, одинокий исследователь решил пойти на риск и узнать, что скрывается в глубинах этого таинственного леса...
-        
+      
     """.trimIndent()
-    val source = ctrl.availableLanguages.find { it is Language.Russian }!!
-    val target = ctrl.availableLanguages.find { it is Language.English }!!
     LaunchedEffect(Any()) {
         CoroutineScope(Dispatchers.IO).launch {
-            val translatedText = ctrl.translate(text, sourceLanguage = source, targetLanguage = target)
-            println(translatedText)
+            val result = translateTextUseCase.invoke(
+                TranslateTextUseCase.Params(
+                    text = text,
+                    sourceLanguage = Language.Russian,
+                    targetLanguage = Language.English,
+                    targetTranslationEngineConfig = null
+                )
+            )
+            println(result)
         }
     }
     Column {

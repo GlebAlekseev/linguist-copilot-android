@@ -9,8 +9,8 @@ import opennlp.tools.sentdetect.SentenceDetectorME
 import opennlp.tools.sentdetect.SentenceModel
 import opennlp.tools.tokenize.SimpleTokenizer
 import pro.linguistcopilot.core.di.ApplicationContext
-import pro.linguistcopilot.feature.textProcessing.entity.Lang
 import pro.linguistcopilot.feature.textProcessing.entity.TaggedText
+import pro.linguistcopilot.feature.word.entity.Language
 import java.util.LinkedList
 import java.util.SortedMap
 import javax.inject.Inject
@@ -52,11 +52,11 @@ class OpenNLPTextProcessingControllerImpl @Inject constructor(
         )
     }
 
-    override fun getTextLanguage(text: String): Lang {
+    override fun getTextLanguage(text: String): Language {
         val lang = languageDetector.predictLanguage(text)
         return when (lang.lang) {
-            "eng" -> Lang.EN
-            else -> Lang.UNKNOWN.also { println("===== Lang.UNKNOWN ${lang.lang}") }
+            "eng" -> Language.English
+            else -> Language.Other(lang.lang).also { println("===== Lang.UNKNOWN ${lang.lang}") }
         }
     }
 

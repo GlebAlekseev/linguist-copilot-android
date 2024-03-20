@@ -1,10 +1,10 @@
-package pro.linguistcopilot.feature.word.usecase
+package pro.linguistcopilot.feature.transcription.usecase
 
 import pro.linguistcopilot.core.utils.UseCase
 import pro.linguistcopilot.feature.textProcessing.controller.TextProcessingController
-import pro.linguistcopilot.feature.textProcessing.entity.Lang
-import pro.linguistcopilot.feature.word.entity.WordTranscription
-import pro.linguistcopilot.feature.word.repository.EnglishTranscriptionRepository
+import pro.linguistcopilot.feature.transcription.entity.WordTranscription
+import pro.linguistcopilot.feature.transcription.repository.EnglishTranscriptionRepository
+import pro.linguistcopilot.feature.word.entity.Language
 import javax.inject.Inject
 
 class TranscribeWordUseCase @Inject constructor(
@@ -18,14 +18,14 @@ class TranscribeWordUseCase @Inject constructor(
     override suspend fun execute(params: Params): WordTranscription? {
         val lang = textProcessingController.getTextLanguage(params.word)
         return when (lang) {
-            Lang.EN -> {
+            Language.English -> {
                 return WordTranscription(
                     text = params.word,
                     transcription = englishTranscriptionRepository.getTranscription(params.word)
                 )
             }
 
-            Lang.UNKNOWN -> null
+            else -> null
         }
     }
 }

@@ -1,12 +1,16 @@
 package pro.linguistcopilot.feature.translate.controller
 
-import pro.linguistcopilot.feature.translate.entity.Language
+import pro.linguistcopilot.feature.translate.entity.TranslatedText
+import pro.linguistcopilot.feature.translate.entity.TranslationEngineConfig
+import pro.linguistcopilot.feature.word.entity.Language
 
 interface TextTranslationController {
-    val availableLanguages: List<Language>
+    val supportedSourceLanguages: List<Language>
+    val supportedTargetLanguages: List<Language>
     suspend fun translate(
         text: String,
         sourceLanguage: Language,
-        targetLanguage: Language
-    ): String
+        targetLanguage: Language,
+        targetTranslationEngineConfig: TranslationEngineConfig
+    ): TranslatedText?
 }
