@@ -10,8 +10,9 @@ dependencies {
     testImplementation(libs.junit)
     
     implementation(libs.androidx.coreKtx)
-    implementation(libs.squareup.retrofit)
+    api(libs.squareup.retrofit)
     implementation(libs.squareup.retrofit.gson)
+    api(libs.squareup.okhttpLogger)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
     implementation(libs.androidx.appCompat)
@@ -19,6 +20,7 @@ dependencies {
     implementation(project(":core:di"))
     api(project(":feature:translate:api"))
     implementation(project(":feature:word:api"))
+    implementation(project(":app:api"))
 
     implementation("com.google.mlkit:translate:17.0.2")
 }

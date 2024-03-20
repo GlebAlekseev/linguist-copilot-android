@@ -9,7 +9,7 @@ import pro.linguistcopilot.feature.translate.controller.TextTranslationControlle
 import pro.linguistcopilot.feature.translate.repository.TranslationEngineConfigRepository
 import pro.linguistcopilot.feature.translate.repository.TranslationEngineConfigRepositoryImpl
 
-@Module
+@Module(includes = [RemoteModule::class])
 interface TranslateModule {
 
     @Binds
