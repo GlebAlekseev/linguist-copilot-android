@@ -11,8 +11,8 @@ import pro.linguistcopilot.feature.bookSearch.di.BookSearchModule
 import pro.linguistcopilot.feature.content.di.ContentModule
 import pro.linguistcopilot.feature.onboarding.di.OnboardingModule
 import pro.linguistcopilot.feature.textProcessing.di.TextProcessingModule
+import pro.linguistcopilot.feature.transcription.di.TranscriptionModule
 import pro.linguistcopilot.feature.translate.di.TranslateModule
-import pro.linguistcopilot.feature.word.di.WordModule
 import pro.linguistcopilot.root.DefaultRootComponent
 import pro.linguistcopilot.root.RootComponent
 
@@ -27,7 +27,7 @@ import pro.linguistcopilot.root.RootComponent
         BookSearchModule::class,
         BookModule::class,
         TextProcessingModule::class,
-        WordModule::class,
+        TranscriptionModule::class,
         TranslateModule::class
     ]
 )

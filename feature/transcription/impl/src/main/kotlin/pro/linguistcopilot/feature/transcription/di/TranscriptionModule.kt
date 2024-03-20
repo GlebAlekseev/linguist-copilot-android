@@ -7,7 +7,7 @@ import pro.linguistcopilot.feature.transcription.repository.EnglishTranscription
 
 
 @Module
-interface WordModule {
+interface TranscriptionModule {
     @Binds
     fun englishTranscriptionRepository(impl: EnglishTranscriptionRepositoryImpl): EnglishTranscriptionRepository
 }
