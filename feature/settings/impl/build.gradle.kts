@@ -41,6 +41,6 @@ dependencies {
     api(project(":feature:settings:api"))
     api(project(":app:api"))
 
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.1.0-dev01")
 
 }
