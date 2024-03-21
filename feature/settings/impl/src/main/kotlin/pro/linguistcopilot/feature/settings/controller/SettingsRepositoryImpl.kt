@@ -13,6 +13,7 @@ import kotlinx.coroutines.runBlocking
 import pro.linguistcopilot.Constants
 import pro.linguistcopilot.core.di.ApplicationContext
 import pro.linguistcopilot.feature.settings.repository.SettingsRepository
+import pro.linguistcopilot.impl.BuildConfig
 import javax.inject.Inject
 
 class SettingsRepositoryImpl @Inject constructor(
@@ -22,6 +23,7 @@ class SettingsRepositoryImpl @Inject constructor(
     private val isFreeDeeplApiKey = booleanPreferencesKey("isFreeDeeplApi")
     private val freeDeeplApiKeyKey = stringPreferencesKey("freeDeeplApiKey")
     private val proDeeplApiKeyKey = stringPreferencesKey("proDeeplApiKey")
+    private val myMemoryEmailKey = stringPreferencesKey("myMemoryEmail")
     override var isFreeDeeplApi: Boolean
         get() {
             return runBlocking {
@@ -63,6 +65,27 @@ class SettingsRepositoryImpl @Inject constructor(
                 }
             }
         }
+
+    override var myMemoryEmail: String?
+        get() {
+            return runBlocking {
+                dataStore.data.map { prefs -> prefs[myMemoryEmailKey].let { if (it == "") null else it } }
+                    .first()
+            }
+        }
+        set(value) {
+            runBlocking {
+                dataStore.edit { prefs ->
+                    prefs[myMemoryEmailKey] = value ?: ""
+                }
+            }
+        }
+
+    init {
+        freeDeeplApiKey = BuildConfig.DEEPL_FREE_API_KEY
+        proDeeplApiKey = BuildConfig.DEEPL_PRO_API_KEY
+        myMemoryEmail = BuildConfig.MYMEMORY_EMAIL
+    }
 }
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(Constants.PREFERENCES_STORAGE)
