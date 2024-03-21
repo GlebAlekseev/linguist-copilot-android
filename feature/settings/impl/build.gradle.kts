@@ -1,4 +1,5 @@
 import java.io.FileInputStream
+import java.io.FileNotFoundException
 import java.util.Properties
 
 plugins {
@@ -14,11 +15,14 @@ android {
     }
     defaultConfig {
         val localProps = Properties()
-        localProps.load(FileInputStream(rootProject.file("local.properties")))
+        try {
+            localProps.load(FileInputStream(rootProject.file("local.properties")))
+        } catch (e: FileNotFoundException) {
 
-        buildConfigField("String", "DEEPL_FREE_API_KEY", "\"${localProps["deepl_free_api_key"]}\"")
-        buildConfigField("String", "DEEPL_PRO_API_KEY", "\"${localProps["deepl_pro_api_key"]}\"")
-        buildConfigField("String", "MYMEMORY_EMAIL", "\"${localProps["mymemory_email"]}\"")
+        }
+        buildConfigField("String", "DEEPL_FREE_API_KEY", "\"${localProps["deepl_free_api_key"] ?: ""}\"")
+        buildConfigField("String", "DEEPL_PRO_API_KEY", "\"${localProps["deepl_pro_api_key"] ?: ""}\"")
+        buildConfigField("String", "MYMEMORY_EMAIL", "\"${localProps["mymemory_email"] ?: ""}\"")
     }
 }
 
