@@ -12,12 +12,12 @@ android {
         applicationId = "pro.linguistcopilot"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-//    packaging {
-//        resources.excludes += setOf("META-INF/**")
-//    }
     packaging {
-        resources.excludes += setOf("META-INF/INDEX.LIST")
+        resources.excludes += setOf("META-INF/**")
     }
+//    packaging {
+//        resources.excludes += setOf("META-INF/INDEX.LIST")
+//    }
 }
 
 dependencies {
@@ -48,4 +48,5 @@ dependencies {
     implementation(project(":feature:translate:impl"))
     implementation(project(":feature:transcription:impl"))
     implementation(project(":feature:word:impl"))
+    implementation(project(":feature:settings:impl"))
 }

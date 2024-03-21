@@ -1,5 +1,6 @@
 package pro.linguistcopilot.feature.translate.controller
 
+import pro.linguistcopilot.feature.settings.repository.SettingsRepository
 import pro.linguistcopilot.feature.translate.entity.TranslatedText
 import pro.linguistcopilot.feature.translate.entity.TranslationEngineConfig
 import pro.linguistcopilot.feature.translate.retrofit.mymemory.MyMemoryService
@@ -7,7 +8,8 @@ import pro.linguistcopilot.feature.word.entity.Language
 import javax.inject.Inject
 
 class MyMemoryTextTranslationControllerImpl @Inject constructor(
-    private val myMemoryService: MyMemoryService
+    private val myMemoryService: MyMemoryService,
+    private val settingsRepository: SettingsRepository
 ) : TextTranslationController {
     override val supportedSourceLanguages: List<Language> =
         listOf(
@@ -32,7 +34,7 @@ class MyMemoryTextTranslationControllerImpl @Inject constructor(
             val result = myMemoryService.translate(
                 query = text,
                 langPair = "${mapLanguage(sourceLanguage)}|${mapLanguage(targetLanguage)}",
-                de = null
+                de = settingsRepository.myMemoryEmail
             )
             if (result.responseStatus != 200) return null
             return TranslatedText(
