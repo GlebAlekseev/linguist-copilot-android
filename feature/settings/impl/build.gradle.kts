@@ -1,6 +1,25 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("linguistcopilot.feature.impl")
     alias(libs.plugins.kotlin.serialization)
+}
+
+
+
+android {
+    buildFeatures {
+        buildConfig = true
+    }
+    defaultConfig {
+        val localProps = Properties()
+        localProps.load(FileInputStream(rootProject.file("local.properties")))
+
+        buildConfigField("String", "DEEPL_FREE_API_KEY", "\"${localProps["deepl_free_api_key"]}\"")
+        buildConfigField("String", "DEEPL_PRO_API_KEY", "\"${localProps["deepl_pro_api_key"]}\"")
+        buildConfigField("String", "MYMEMORY_EMAIL", "\"${localProps["mymemory_email"]}\"")
+    }
 }
 
 dependencies {
@@ -8,7 +27,7 @@ dependencies {
 
     androidTestImplementation(libs.androidx.testExtJunit)
     testImplementation(libs.junit)
-    
+
     implementation(libs.androidx.coreKtx)
     implementation(libs.dagger)
     ksp(libs.dagger.compiler)
