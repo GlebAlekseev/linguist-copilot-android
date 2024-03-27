@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         (this.applicationContext as App).appComponent.inject(this)
         super.onCreate(savedInstanceState)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
         setContentView(
             ComposeView(this).apply {
